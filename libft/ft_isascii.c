@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 19:21:18 by memilio          ###   ########.fr       */
+/*   Created: 2020/04/30 01:20:44 by memilio           #+#    #+#             */
+/*   Updated: 2020/05/04 21:28:49 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft.h"
-
-
-#endif
+int		ft_isascii(int ch)
+{
+	if (ch >= 0 && ch <= 127)
+		return (1);
+	else
+		return (0);
+}

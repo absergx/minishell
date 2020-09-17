@@ -6,11 +6,11 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 15:56:23 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 17:38:49 by memilio          ###   ########.fr       */
+/*   Updated: 2020/08/11 14:36:07 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
 static int		ft_memclean(char *buffer, char *surplus)
 {

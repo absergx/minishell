@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/01 01:31:30 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 18:04:06 by memilio          ###   ########.fr       */
+/*   Created: 2020/04/30 01:13:01 by memilio           #+#    #+#             */
+/*   Updated: 2020/05/04 21:29:31 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+int		ft_isdigit(int ch)
 {
-	if (s)
-	{
-		ft_putstr_fd(s, fd);
-		ft_putchar_fd('\n', fd);
-	}
+	if (ch >= '0' && ch <= '9')
+		return (1);
+	else
+		return (0);
 }

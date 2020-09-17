@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 19:21:18 by memilio          ###   ########.fr       */
+/*   Created: 2020/04/29 16:52:58 by memilio           #+#    #+#             */
+/*   Updated: 2020/05/03 14:32:24 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft.h"
+size_t	ft_strlen(const char *str)
+{
+	size_t lenght;
 
-
-#endif
+	lenght = 0;
+	while (str[lenght] != '\0')
+	{
+		lenght++;
+	}
+	return (lenght);
+}

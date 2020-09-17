@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/29 16:52:58 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 17:39:50 by memilio          ###   ########.fr       */
+/*   Created: 2020/05/01 01:28:54 by memilio           #+#    #+#             */
+/*   Updated: 2020/05/05 18:17:48 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-size_t	ft_strlen(const char *str)
+void	ft_putstr_fd(char *s, int fd)
 {
-	size_t lenght;
-
-	lenght = 0;
-	while (str[lenght] != '\0')
-	{
-		lenght++;
-	}
-	return (lenght);
+	if (s)
+		write(fd, s, ft_strlen(s));
 }

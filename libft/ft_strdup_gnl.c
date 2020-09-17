@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strdup_gnl.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/01 01:13:52 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 18:02:47 by memilio          ###   ########.fr       */
+/*   Created: 2020/08/11 11:21:06 by memilio           #+#    #+#             */
+/*   Updated: 2020/08/11 14:36:53 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+char	*ft_strdup_gnl(char *str, int f)
 {
-	write(fd, &c, 1);
+	char	*res;
+	size_t	len;
+	size_t	i;
+
+	len = 0;
+	i = 0;
+	while (str[len])
+		len++;
+	if (!(res = (char *)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	while (i < len)
+	{
+		res[i] = str[i];
+		i++;
+	}
+	res[i] = '\0';
+	if (f)
+		free(str);
+	return (res);
 }

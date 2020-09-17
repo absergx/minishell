@@ -1,43 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 19:22:43 by memilio          ###   ########.fr       */
+/*   Created: 2020/04/30 19:01:30 by memilio           #+#    #+#             */
+/*   Updated: 2020/05/08 14:34:24 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include "minishell.h"
+#include "libft.h"
 
-char	*get_line(void)
+static int		ft_isinset(char c, const char *set)
 {
-	char	*line;
-
-	line = NULL;
-	if (get_next_line(0, &line) < 0)
-		ft_putstr_fd("Error\n", 0);
-	return (line);
-}
-
-int		main(void)
-{
-	int		status;
-	char	*line;
-
-	status = 1;
-	while (status)
+	while (*set != '\0')
 	{
-		ft_putstr_fd("> ", 0);
-		line = get_line();
-		if (!ft_strcmp(line, "exit"))
-			status = 0;
-		else
-			ft_putendl_fd(line, 0);
+		if (c == *set)
+			return (1);
+		++set;
 	}
 	return (0);
+}
+
+char			*ft_strtrim(char const *s1, char const *set)
+{
+	size_t	len;
+
+	if (!s1 || !set)
+		return (NULL);
+	len = 0;
+	while (ft_isinset(*s1, set))
+		++s1;
+	if (*s1)
+	{
+		len = ft_strlen(s1);
+		while (ft_isinset(s1[len - 1], set))
+			--len;
+	}
+	return (ft_substr(s1, 0, len));
 }

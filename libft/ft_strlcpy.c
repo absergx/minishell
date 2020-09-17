@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup_gnl.c                                    :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/11 11:21:06 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 17:37:59 by memilio          ###   ########.fr       */
+/*   Created: 2020/04/29 22:08:47 by memilio           #+#    #+#             */
+/*   Updated: 2020/05/08 15:26:22 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-char	*ft_strdup_gnl(char *str, int f)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	char	*res;
-	size_t	len;
-	size_t	i;
+	size_t i;
 
-	len = 0;
 	i = 0;
-	while (str[len])
-		len++;
-	if (!(res = (char *)malloc(sizeof(char) * len + 1)))
-		return (NULL);
-	while (i < len)
+	if (!dst && src)
+		return (ft_strlen(src));
+	else if (!src && !dst)
+		return (0);
+	if (size == 0)
+		return (ft_strlen(src));
+	while (i < (size - 1) && src[i] != '\0')
 	{
-		res[i] = str[i];
-		i++;
+		dst[i] = src[i];
+		++i;
 	}
-	res[i] = '\0';
-	if (f)
-		free(str);
-	return (res);
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }

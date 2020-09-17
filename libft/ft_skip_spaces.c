@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_skip_spaces.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 19:21:18 by memilio          ###   ########.fr       */
+/*   Created: 2020/08/24 18:01:39 by memilio           #+#    #+#             */
+/*   Updated: 2020/08/25 18:46:45 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft.h"
-
-
-#endif
+void	ft_skip_spaces(char *str, int *i)
+{
+	if (!str)
+		return ;
+	while (str[*i] != '\0' && str[*i] == ' ')
+	{
+		*i += 1;
+	}
+}

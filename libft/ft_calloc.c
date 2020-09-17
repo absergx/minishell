@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 00:22:24 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 17:44:48 by memilio          ###   ########.fr       */
+/*   Created: 2020/04/30 04:47:33 by memilio           #+#    #+#             */
+/*   Updated: 2020/05/08 14:17:10 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int		ft_strcmp(const char *str1, const char *str2)
+void	*ft_calloc(size_t count, size_t size)
 {
-	size_t i;
+	void	*res;
+	size_t	len;
+	size_t	i;
 
+	len = count * size;
+	if (!(res = malloc(len)))
+		return (NULL);
 	i = 0;
-	while (str1[i] != '\0' && str2[i] != '\0')
+	while (i < len)
 	{
-		if (str1[i] != str2[i])
-			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+		((unsigned char *)res)[i] = 0;
 		++i;
 	}
-	if (str1[i] != str2[i])
-		return ((unsigned char)str1[i] - (unsigned char)str2[i]);
-	return (0);
+	return (res);
 }

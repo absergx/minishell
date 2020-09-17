@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 18:34:49 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 17:39:02 by memilio          ###   ########.fr       */
+/*   Created: 2020/04/30 00:22:24 by memilio           #+#    #+#             */
+/*   Updated: 2020/05/03 14:32:23 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int		ft_strncmp(const char *str1, const char *str2, size_t size)
 {
-	char	*res;
-	size_t	len;
+	size_t i;
 
-	if (!s1 || !s2)
-		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	if (!(res = (char *)malloc(sizeof(char) * len)))
-		return (NULL);
-	ft_strlcpy(res, s1, ft_strlen(s1) + 1);
-	ft_strlcat(res, s2, len);
-	return (res);
+	i = 0;
+	while (str1[i] != '\0' && str2[i] != '\0' && i < size)
+	{
+		if (str1[i] != str2[i])
+			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+		++i;
+	}
+	if (str1[i] != str2[i] && i != size)
+		return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+	return (0);
 }

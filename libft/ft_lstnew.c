@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/29 22:08:47 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 17:40:00 by memilio          ###   ########.fr       */
+/*   Created: 2020/05/01 22:20:57 by memilio           #+#    #+#             */
+/*   Updated: 2020/05/03 14:32:34 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+t_list	*ft_lstnew(void *content)
 {
-	size_t i;
+	t_list *elem;
 
-	i = 0;
-	if (!dst && src)
-		return (ft_strlen(src));
-	else if (!src && !dst)
-		return (0);
-	if (size == 0)
-		return (ft_strlen(src));
-	while (i < (size - 1) && src[i] != '\0')
-	{
-		dst[i] = src[i];
-		++i;
-	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
+	if (!(elem = (t_list *)malloc(sizeof(t_list))))
+		return (NULL);
+	elem->content = content;
+	elem->next = NULL;
+	return (elem);
 }

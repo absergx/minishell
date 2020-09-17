@@ -6,11 +6,11 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 22:08:35 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 17:40:38 by memilio          ###   ########.fr       */
+/*   Updated: 2020/05/03 14:32:27 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
 char	*ft_strchr(const char *string, int symbol)
 {

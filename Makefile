@@ -6,35 +6,34 @@
 #    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/17 17:45:53 by memilio           #+#    #+#              #
-#    Updated: 2020/09/17 18:05:53 by memilio          ###   ########.fr        #
+#    Updated: 2020/09/17 19:27:46 by memilio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= minishell
-SRC		=	./srcs/main.c \
-			./utils/ft_putchar_fd.c \
-			./utils/ft_putstr_fd.c \
-			./utils/ft_putendl_fd.c \
-			./utils/ft_strchr.c \
-			./utils/ft_strcmp.c \
-			./utils/ft_strdup_gnl.c \
-			./utils/ft_strjoin.c \
-			./utils/ft_strlcat.c \
-			./utils/ft_strlcpy.c \
-			./utils/ft_strlen.c \
-			./utils/get_next_line.c
-INC		=	./includes/
+NAME	=	minishell
+FUNC	=	main.c
+SRC_DIR	=	./srcs/
+SRC		=	$(addprefix $(SRC_DIR), $(FUNC))
+INC		=	-I./includes/ -I$(LFT_DIR)
 CC		=	gcc
+LFT_DIR	=	./libft/
+LFT_FLG	=	-L$(LFT_DIR) -lft
 FLAGS	=	-Wall -Wextra -Werror
 OBJ		=	$(SRC:.c=.o)
 
-all: $(NAME)
+all: lft $(NAME)
+	@echo "\033[32m[+] Make completed\033[0m"
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) $(INC) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ) $(INC) $(LFT_FLG) -o $(NAME)
+
+lft:
+	@$(MAKE) -C $(LFT_DIR) --silent
+	@$(MAKE) bonus -C $(LFT_DIR) --silent
+	@echo  "\033[32m[+] Libft builded\033[0m"
 
 clean:
 	/bin/rm -f $(OBJ)
