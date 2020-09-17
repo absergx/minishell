@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 18:04:29 by memilio          ###   ########.fr       */
+/*   Created: 2020/04/30 18:34:49 by memilio           #+#    #+#             */
+/*   Updated: 2020/09/17 17:39:02 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
 #include "../includes/minishell.h"
 
-char	*get_line(void)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*line;
+	char	*res;
+	size_t	len;
 
-	line = NULL;
-	if (get_next_line(0, &line) < 0)
-		ft_putstr_fd("Error\n", 0);
-	return (line);
-}
-
-int		main(void)
-{
-	int		status;
-	char	*line;
-
-	status = 1;
-	while (status)
-	{
-		ft_putstr_fd("> ", 0);
-		line = get_line();
-		if (!ft_strcmp(line, "exit"))
-			status = 0;
-		else
-			ft_putendl_fd(line, 0);
-	}
-	return (0);
+	if (!s1 || !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	if (!(res = (char *)malloc(sizeof(char) * len)))
+		return (NULL);
+	ft_strlcpy(res, s1, ft_strlen(s1) + 1);
+	ft_strlcat(res, s2, len);
+	return (res);
 }

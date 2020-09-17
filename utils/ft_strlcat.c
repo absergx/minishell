@@ -1,43 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 18:04:29 by memilio          ###   ########.fr       */
+/*   Created: 2020/04/29 22:08:11 by memilio           #+#    #+#             */
+/*   Updated: 2020/09/17 17:39:55 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
 #include "../includes/minishell.h"
 
-char	*get_line(void)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	char	*line;
+	size_t i;
+	size_t j;
 
-	line = NULL;
-	if (get_next_line(0, &line) < 0)
-		ft_putstr_fd("Error\n", 0);
-	return (line);
-}
-
-int		main(void)
-{
-	int		status;
-	char	*line;
-
-	status = 1;
-	while (status)
+	i = 0;
+	j = 0;
+	while (dst[i] != '\0' && i < size)
+		++i;
+	while (src[j] != '\0' && (i + j + 1) < size)
 	{
-		ft_putstr_fd("> ", 0);
-		line = get_line();
-		if (!ft_strcmp(line, "exit"))
-			status = 0;
-		else
-			ft_putendl_fd(line, 0);
+		dst[i + j] = src[j];
+		++j;
 	}
-	return (0);
+	if (i < size)
+		dst[i + j] = '\0';
+	return (i + ft_strlen(src));
 }

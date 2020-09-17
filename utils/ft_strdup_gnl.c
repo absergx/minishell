@@ -1,43 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup_gnl.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 18:04:29 by memilio          ###   ########.fr       */
+/*   Created: 2020/08/11 11:21:06 by memilio           #+#    #+#             */
+/*   Updated: 2020/09/17 17:37:59 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
 #include "../includes/minishell.h"
 
-char	*get_line(void)
+char	*ft_strdup_gnl(char *str, int f)
 {
-	char	*line;
+	char	*res;
+	size_t	len;
+	size_t	i;
 
-	line = NULL;
-	if (get_next_line(0, &line) < 0)
-		ft_putstr_fd("Error\n", 0);
-	return (line);
-}
-
-int		main(void)
-{
-	int		status;
-	char	*line;
-
-	status = 1;
-	while (status)
+	len = 0;
+	i = 0;
+	while (str[len])
+		len++;
+	if (!(res = (char *)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	while (i < len)
 	{
-		ft_putstr_fd("> ", 0);
-		line = get_line();
-		if (!ft_strcmp(line, "exit"))
-			status = 0;
-		else
-			ft_putendl_fd(line, 0);
+		res[i] = str[i];
+		i++;
 	}
-	return (0);
+	res[i] = '\0';
+	if (f)
+		free(str);
+	return (res);
 }

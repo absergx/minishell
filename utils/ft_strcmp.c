@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/17 18:04:29 by memilio          ###   ########.fr       */
+/*   Created: 2020/04/30 00:22:24 by memilio           #+#    #+#             */
+/*   Updated: 2020/09/17 17:44:48 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
 #include "../includes/minishell.h"
 
-char	*get_line(void)
+int		ft_strcmp(const char *str1, const char *str2)
 {
-	char	*line;
+	size_t i;
 
-	line = NULL;
-	if (get_next_line(0, &line) < 0)
-		ft_putstr_fd("Error\n", 0);
-	return (line);
-}
-
-int		main(void)
-{
-	int		status;
-	char	*line;
-
-	status = 1;
-	while (status)
+	i = 0;
+	while (str1[i] != '\0' && str2[i] != '\0')
 	{
-		ft_putstr_fd("> ", 0);
-		line = get_line();
-		if (!ft_strcmp(line, "exit"))
-			status = 0;
-		else
-			ft_putendl_fd(line, 0);
+		if (str1[i] != str2[i])
+			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+		++i;
 	}
+	if (str1[i] != str2[i])
+		return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 	return (0);
 }
