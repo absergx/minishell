@@ -3,15 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
+#    By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/17 17:45:53 by memilio           #+#    #+#              #
-#    Updated: 2020/09/17 19:27:46 by memilio          ###   ########.fr        #
+#    Updated: 2020/09/21 16:36:09 by casubmar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
-FUNC	=	main.c
+FUNC	=	main.c \
+			ft_minishell.c \
+			ft_str.c 
 SRC_DIR	=	./srcs/
 SRC		=	$(addprefix $(SRC_DIR), $(FUNC))
 INC		=	-I./includes/ -I$(LFT_DIR)

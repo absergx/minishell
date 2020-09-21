@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/21 20:27:15 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/21 20:32:01 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,15 @@ int		main(void)
 {
 	int		status;
 	char	*line;
+	t_all	all;
 
 	status = 1;
+	all._pipe = 0;
 	while (status)
 	{
 		ft_putstr_fd("> ", 0);
 		line = get_line();
+		ft_minishell(line, &all);
 		if (!ft_strcmp(line, "exit"))
 			status = 0;
 		else
