@@ -72,7 +72,6 @@ int		main(void)
 	t_all	all;
 
 	status = 1;
-	all._pipe = 0;
 	while (status)
 	{
 		ft_putstr_fd("> ", 0);
