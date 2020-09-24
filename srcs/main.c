@@ -60,7 +60,7 @@ char	*get_line(void)
 	char	*line;
 
 	line = NULL;
-	if (get_next_line(0, &line) < 0)
+	if (get_next_line(4, &line) < 0)
 		ft_putstr_fd("Error\n", 0);
 	return (check_backslash(line));
 }
@@ -72,6 +72,8 @@ int		main(void)
 	t_all	all;
 
 	status = 1;
+	dup2(0, 3);
+	dup2(1, 4);
 	while (status)
 	{
 		ft_putstr_fd("> ", 0);

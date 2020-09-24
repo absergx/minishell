@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+t_commas		*ft_last_commas(t_commas *head)
+{
+	t_commas *temp;
+
+	if (!head)
+		return (head);
+	temp = head;
+	while (temp->next)
+		temp = temp->next;
+	return (temp);
+}
+
 void			ft_commas_clear(t_commas *head)
 {
 	t_commas	*temp;

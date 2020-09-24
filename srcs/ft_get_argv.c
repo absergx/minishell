@@ -12,16 +12,19 @@
 
 #include "minishell.h"
 
-int		ft_get_argv(t_all *all, char *str)
+int		ft_get_argv(t_all *all, char *str, int start, int last)
 {
-	int len;
-	int i;
+	char *temp = ft_substr(str, start, last - start);
+	char **argv = ft_split(temp, ' '); // пробел в КОВЫЧКАХ
+	ft_add_back(&(all->com), argv);
 
-	i = -1;
-	len = 0;
-	while (str[++i])
+	// Если есть пайп?
+	if (all->_pipe)
 	{
-		++i;
+		t_commas *last;
+
+		last = ft_last_commas(all->com);
+
 	}
 	return (1);
 }

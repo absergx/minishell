@@ -36,6 +36,10 @@ typedef struct  s_all
 {
 	t_str		*str;
 	t_commas	*com;
+	int 		_pipe;
+	int 		ar_right;
+	int 		ar_left;
+	int 		dat_right;
 }               t_all;
 
 t_str       *ft_init_str(void);
@@ -44,6 +48,7 @@ void        ft_minishell(char *s, t_all *all);
 t_commas	*ft_new_commas(char **content);
 int 		ft_add_back(t_commas **head, char **content);
 void		ft_commas_clear(t_commas *head);
-int			ft_get_argv(t_all *all, char *str);
+int			ft_get_argv(t_all *all, char *str, int start, int last);
+t_commas	*ft_last_commas(t_commas *head);
 
 #endif
