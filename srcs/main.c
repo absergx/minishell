@@ -42,7 +42,7 @@ char	*check_backslash(char *line)
 	if (last_backslashes(line))
 	{
 		line[ft_strlen(line) - 1] = '\0';
-		ft_putstr_fd("\\ ", 3);
+		ft_putstr_fd("\\ ", 1);
 		tmp = get_line();
 		ret = ft_strjoin(line, tmp);
 		free(line);
@@ -60,8 +60,8 @@ char	*get_line(void)
 	char	*line;
 
 	line = NULL;
-	if (get_next_line(4, &line) < 0)
-		ft_putstr_fd("Error\n", 3);
+	if (get_next_line(3, &line) < 0)
+		ft_putstr_fd("Error\n", 2);
 	return (line);
 }
 
@@ -72,16 +72,20 @@ int		main(int argc, char **argv, char **envp)
 	t_all	all;
 
 	all.envp = envp;
-	all.fds[0] = 3;
-	all.fds[1] = 4;
+
+	all._pipe = 0;
+	all.ar_left = 0;
+	all.ar_right = 0;
+	all.dar_right = 0;
 	status = 1;
 	dup2(0, 3);
 	dup2(1, 4);
 	while (status)
 	{
-		ft_putstr_fd("> ", 3);
+		ft_putstr_fd("> ", 1);
 		line = get_line();
 		ft_minishell(line, &all);
+		dup2(3, 0);
 		if (!ft_strcmp(line, "exit"))
 			status = 0;
 	}

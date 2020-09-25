@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_do_it(t_commas *el, t_all *all)
+int		ft_do_it(t_commas *el, t_all *all)
 {
 	int fd;
 	char *path = NULL;
@@ -42,49 +42,47 @@ void	ft_do_it(t_commas *el, t_all *all)
 	}
 	free(el->argv[0]);
 	el->argv[0] = res;
-	execve(el->argv[0], el->argv, all->envp);
+	return (execve(el->argv[0], el->argv, all->envp));
 }
 
 int		ft_get_argv(t_all *all, char *str, int start, int last)
 {
 	char *temp = ft_substr(str, start, last - start);
 	char **argv = ft_split(temp, ' '); // пробел в КОВЫЧКАХ
-//	ft_add_back(&(all->com), argv);
 	t_commas *l;
 
 	l = ft_new_commas(argv);
-
+	all->fds[0] = 3;
+	all->fds[1] = 4;
 	// Если есть пайп?
 	if (all->_pipe)
 	{
 		pipe(all->fds);
 		int pid = fork();
-		wait(0);
 		if (pid == 0)
 		{
-			dup2(1, all->fds[0]);
-			ft_do_it(l, all);
+			dup2(all->fds[1], 1);
 			close(all->fds[1]);
+			ft_do_it(l, all);
 			close(all->fds[0]);
 			exit(0);
 		}
 		else
 		{
-			dup2(0, all->fds[1]);
-			close(all->fds[0]);
-			wait(0);
+			dup2(all->fds[0], 0);
 			close(all->fds[1]);
+			wait(0);
+			close(all->fds[0]);
 		}
 	}
 	else
 	{
 		int pid;
 		pid = fork();
-		wait(0);
 		if (pid == 0)
-			ft_do_it(l, all);
+			exit(ft_do_it(l, all));
+		else
+			wait(0);
 	}
-	(void)all;
-	(void)argv;
 	return (1);
 }

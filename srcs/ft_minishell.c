@@ -49,6 +49,7 @@ static	void	ft_execute(t_all *all)
 			ft_get_argv(all, s, start, i + 1);
 			start = i + 1;
 		}
+		if (s[i] == '<' ||)
 	}
 
 

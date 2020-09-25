@@ -40,7 +40,7 @@ typedef struct  s_all
 	int 		_pipe;
 	int 		ar_right;
 	int 		ar_left;
-	int 		dat_right;
+	int 		dar_right;
 	int 		fds[2];
 	char 		**envp;
 }               t_all;
