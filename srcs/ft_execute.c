@@ -42,12 +42,6 @@ void	ft_execute(t_all *all)
 
 		}
 	}
-
-
-
-
-
-
 	free(all->str->str);
 	free(all->str);
 	all->str = ft_init_str();

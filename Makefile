@@ -3,27 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+         #
+#    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/17 17:45:53 by memilio           #+#    #+#              #
-#    Updated: 2020/09/21 16:36:09 by casubmar         ###   ########.fr        #
+#    Updated: 2020/09/25 21:08:52 by memilio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 FUNC	=	main.c \
-			ft_minishell.c \
-			ft_str.c \
-			ft_get_argv.c \
-			ft_commas.c \
-			ft_execute.c
+			ft_parse.c
 SRC_DIR	=	./srcs/
 SRC		=	$(addprefix $(SRC_DIR), $(FUNC))
 INC		=	-I./includes/ -I$(LFT_DIR)
 CC		=	gcc
 LFT_DIR	=	./libft/
 LFT_FLG	=	-L$(LFT_DIR) -lft
-FLAGS	=	-Wall -Wextra -Werror
+FLAGS	=	-Wall -Wextra -Werror -g
 OBJ		=	$(SRC:.c=.o)
 
 all: lft $(NAME)

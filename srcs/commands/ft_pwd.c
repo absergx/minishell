@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/25 21:08:04 by memilio          ###   ########.fr       */
+/*   Created: 2020/09/24 17:35:02 by memilio           #+#    #+#             */
+/*   Updated: 2020/09/24 18:44:55 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+// #include "minishell.h"
 
 # include <unistd.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <sys/stat.h>
+# include <time.h>
+# include <sys/wait.h>
 # include <stdlib.h>
-# include "libft.h"
-# include <stdio.h>
-# include <fcntl.h>
+# include <math.h>
+# include <errno.h>
+#include <stdio.h>
 
-typedef struct	s_parse
+int		ft_pwd(char **argv, char **envp)
 {
-	int			word_s;
-	int			word_e;
-	int			word_count;
-}				t_parse;
+	char	*path;
+	int		errno;
 
-typedef struct  s_all
+	path = getcwd(NULL, 0);
+	printf("%s\n", path);
+	return (errno);
+}
+
+int main(void)
 {
-	t_parse		parse;
-	int 		fds[2];
-	char		**argv;
-	char 		**envp;
-}               t_all;
-
-int		ft_parse(char *line, t_all *all);
-
-#endif
+	ft_pwd();
+	return (0);
+}

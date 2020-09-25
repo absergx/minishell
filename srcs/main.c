@@ -3,57 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/21 20:32:01 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/09/25 21:28:12 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
 #include "minishell.h"
-
-char	*get_line(void);
-
-int		last_backslashes(char *line)
-{
-	size_t	len;
-	int		count;
-
-	count = 0;
-	len = ft_strlen(line);
-	while (len >= 0 && line[len - 1] == '\\')
-	{
-		++count;
-		--len;
-	}
-	return (count % 2);
-}
-
-char	*check_backslash(char *line)
-{
-	
-	char	*tmp;
-	char	*ret;
-
-	tmp = NULL;
-	ret = NULL;
-	if (last_backslashes(line))
-	{
-		line[ft_strlen(line) - 1] = '\0';
-		ft_putstr_fd("\\ ", 1);
-		tmp = get_line();
-		ret = ft_strjoin(line, tmp);
-		free(line);
-		free(tmp);
-		if (last_backslashes(ret))
-			return (check_backslash(ret));
-	}
-	else
-		return (line);
-	return (ret);
-}
 
 char	*get_line(void)
 {
@@ -72,21 +29,21 @@ int		main(int argc, char **argv, char **envp)
 	t_all	all;
 
 	all.envp = envp;
-
-	all._pipe = 0;
-	all.ar_left = 0;
-	all.ar_right = 0;
-	all.dar_right = 0;
 	status = 1;
 	dup2(0, 3);
 	dup2(1, 4);
 	while (status)
 	{
 		ft_putstr_fd("> ", 1);
-		line = get_line();
-		ft_minishell(line, &all);
-		dup2(3, 0);
-		dup2(4, 1);
+		if (!(line = get_line()))
+			continue ;
+		all.parse.word_s = 0;
+		all.parse.word_e = 0;
+		all.parse.word_count = 0;
+		ft_parse(line, &all);
+		// ft_minishell(line, &all);
+		// dup2(3, 0);
+		// dup2(4, 1);
 		if (!ft_strcmp(line, "exit"))
 			status = 0;
 	}
