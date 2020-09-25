@@ -15,7 +15,8 @@ FUNC	=	main.c \
 			ft_minishell.c \
 			ft_str.c \
 			ft_get_argv.c \
-			ft_commas.c
+			ft_commas.c \
+			ft_execute.c
 SRC_DIR	=	./srcs/
 SRC		=	$(addprefix $(SRC_DIR), $(FUNC))
 INC		=	-I./includes/ -I$(LFT_DIR)

@@ -54,5 +54,6 @@ void		ft_commas_clear(t_commas *head);
 int			ft_get_argv(t_all *all, char *str, int start, int last);
 t_commas	*ft_last_commas(t_commas *head);
 t_commas	*ft_prev_last(t_commas *head);
+void		ft_execute(t_all *all);
 
 #endif
