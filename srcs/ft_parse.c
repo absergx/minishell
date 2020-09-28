@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 20:16:21 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/27 19:08:36 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/28 16:19:25 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,87 @@ char	**ft_add_argv(char **argv, int words)
 	return (new_argv);
 }
 
+int		ft_check_quotes(t_all *all)
+{
+	int		i;
+
+	i = 0;
+	while (all->argv[all->parse.word_count - 1][i])
+	{
+		if (all->argv[all->parse.word_count - 1][i] == '\'')
+		{
+			if (!all->parse.quotes)
+				all->parse.quotes = 1;
+			else if (all->parse.quotes == 1)
+				all->parse.quotes = 0;
+			break ;
+		}
+		else if (all->argv[all->parse.word_count - 1][i] == '"')
+		{
+			if (!all->parse.quotes)
+				all->parse.quotes = 2;
+			else if (all->parse.quotes == 2)
+				all->parse.quotes = 0;
+			break ;
+		}
+		++i;
+	}
+	return (1);
+}
+
+char	*ft_rejoin(char *str1, t_all *all, char *line)
+{
+	char	*res;
+	char	*str2;
+
+	if (!(str2 = ft_substr(line, all->parse.word_s,
+			(size_t)(all->parse.word_e - all->parse.word_s + 1))))
+		return (NULL);
+	if (!(res = ft_strjoin(str1, str2)))
+		return (NULL);
+	if (str1)
+		free(str1);
+	if (str2)
+		free(str2);
+	return (res);
+}
+
 int		ft_add_word(t_all *all, char *line)
 {
-	if (!(all->argv = ft_add_argv(all->argv, all->parse.word_count)))
-		return (0); // Malloc error
-	if (!(all->argv[all->parse.word_count] = ft_substr(line, all->parse.word_s,
-		(size_t)(all->parse.word_e - all->parse.word_s + 1))))
-		return (0); // Malloc error
-	all->parse.word_count += 1;
-	ft_skip_spaces(line, &all->parse.word_e);
+	if (!all->parse.quotes)
+	{
+		if (!(all->argv = ft_add_argv(all->argv, all->parse.word_count)))
+			return (0); // Malloc error
+		if (!(all->argv[all->parse.word_count] = ft_substr(line, all->parse.word_s,
+			(size_t)(all->parse.word_e - all->parse.word_s + 1))))
+			return (0); // Malloc error
+		all->parse.word_count += 1;
+	}
+	else
+	{
+		if (!(all->argv[all->parse.word_count - 1] = ft_rejoin(all->argv[all->parse.word_count - 1], all, line)))
+			return (0);
+	}
+	ft_check_quotes(all);
+	if (!all->parse.quotes)
+		ft_skip_spaces(line, &all->parse.word_e);
 	all->parse.word_s = all->parse.word_e;
 	all->parse.word_e -= 1;
 	return (1);
 }
 
+void	print_argv(char **argv)
+{
+	int i = 0;
+	while (argv[i])
+	{
+		printf("%s\n", argv[i]);
+		++i;
+	}
+}
+
 int		ft_parse(char *line, t_all *all)
 {
-	int		quotes;
-
-	quotes = 0;
 	if (!line)
 		return (0);
 	while (1)
@@ -63,15 +125,10 @@ int		ft_parse(char *line, t_all *all)
 				exit(1);
 			break;
 		}
-		else if (!quotes && (line[all->parse.word_e] == ' ') && !ft_add_word(all, line))
+		else if (line[all->parse.word_e] == ' ' && !ft_add_word(all, line))
 			return (0);
 		all->parse.word_e += 1;
 	}
-	int i = 0;
-	while (all->argv[i])
-	{
-		printf("%s\n", all->argv[i]);
-		++i;
-	}
+	print_argv(all->argv);
 	return (1);
 }

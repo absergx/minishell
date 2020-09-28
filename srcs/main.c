@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/27 17:09:48 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/28 14:03:08 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		main(int argc, char **argv, char **envp)
 		all.parse.word_s = 0;
 		all.parse.word_e = 0;
 		all.parse.word_count = 0;
+		all.parse.quotes = 0;
 		ft_parse(line, &all);
 		// ft_minishell(line, &all);
 		// dup2(3, 0);
