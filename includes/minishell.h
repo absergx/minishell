@@ -25,6 +25,7 @@ typedef struct	s_parse
 	int			word_e;
 	int			word_count;
 	int			quotes;
+	int 		space_before;
 }				t_parse;
 
 typedef struct  s_all
@@ -33,6 +34,7 @@ typedef struct  s_all
 	int 		fds[2];
 	char		**argv;
 	char 		**envp;
+	int 		size_argv;
 }               t_all;
 
 int		ft_parse(char *line, t_all *all);

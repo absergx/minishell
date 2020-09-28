@@ -38,9 +38,13 @@ int		main(int argc, char **argv, char **envp)
 		if (!(line = get_line()))
 			continue ;
 		all.parse.word_s = 0;
+		if (!(all.argv = ft_calloc(2, sizeof(char *))))
+			return (0);
+		all.size_argv = 2;
 		all.parse.word_e = 0;
 		all.parse.word_count = 0;
 		all.parse.quotes = 0;
+		all.parse.space_before = 0;
 		ft_parse(line, &all);
 		// ft_minishell(line, &all);
 		// dup2(3, 0);
