@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:50:11 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 15:21:32 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/29 15:27:56 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			ft_export_check_name(char *name)
 
 static void	ft_export_error(t_all *all, char *name)
 {
-	// STATUS
+	all->status = 1;
 	ft_putstr_fd("minishell: export: '", 2);
 	ft_putstr_fd(name, 2);
 	ft_putstr_fd("': not a valid identifier\n", 2);
