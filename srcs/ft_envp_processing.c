@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/minishell.h"
+#include "minishell.h"
 
 char	*ft_get_envp_value(t_all *all, char *name)
 {

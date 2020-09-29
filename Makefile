@@ -12,7 +12,8 @@
 
 NAME	=	minishell
 FUNC	=	main.c \
-			ft_parse.c
+			ft_parse.c \
+			ft_envp_processing.c
 SRC_DIR	=	./srcs/
 SRC		=	$(addprefix $(SRC_DIR), $(FUNC))
 INC		=	-I./includes/ -I$(LFT_DIR)

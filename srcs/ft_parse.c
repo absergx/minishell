@@ -83,10 +83,34 @@ int 	ft_single_quote(char *line, char **word)
 	return (i);
 }
 
-int 	ft_double_quote(char *line, char **word)
+char	*ft_get_env(char *line, int *i, t_all *all)
+{
+	char *word;
+	char *res;
+	int len;
+	int tmp;
+
+	tmp = 1;
+	len = 0;
+	while (line[tmp] != ' ' && line[tmp] != '"')
+	{
+		++tmp;
+		++len;
+	}
+	word = ft_substr(line, 1, len);
+	printf("word - %s\n", word);
+	res = ft_get_envp_value(all, word);
+	printf("res - %s\n", res);
+	free(word);
+	*i += len + 1;
+	return (res);
+}
+
+int 	ft_double_quote(char *line, char **word, t_all *all)
 {
 	int i = 1;
-//	char *temp;
+	int j = 0;
+	char *temp;
 
 	if (line[i] == '"')
 	{
@@ -99,7 +123,23 @@ int 	ft_double_quote(char *line, char **word)
 		if (line[i] == '\\' && ft_strchr("$\"\\", line[i + 1]))
 			++i;
 		else if (line[i] == '$')
-			++i; // добавить замену переменных
+		{
+			temp = ft_get_env(line + i, &i, all);
+			if (!temp)
+				*word = ft_add_symbol(*word, 0);
+			else
+			{
+				while (temp[j])
+				{
+					*word = ft_add_symbol(*word, temp[j]);
+					++j;
+				}
+				free(temp);
+				temp = NULL;
+			}
+			if (line[i] == '"')
+				break;
+		}
 		*word = ft_add_symbol(*word, line[i]);
 		++i;
 	}
@@ -134,7 +174,7 @@ int		ft_parse(char *line, t_all *all)
 		}
 		else if (line[i] == '"')
 		{
-			i += ft_double_quote(line + i, &word);
+			i += ft_double_quote(line + i, &word, all);
 		}
 		else if (line[i] == ' ' || line[i + 1] == 0)
 		{

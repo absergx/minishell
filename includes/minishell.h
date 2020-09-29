@@ -38,5 +38,6 @@ typedef struct  s_all
 }               t_all;
 
 int		ft_parse(char *line, t_all *all);
+char	*ft_get_envp_value(t_all *all, char *name);
 
 #endif
