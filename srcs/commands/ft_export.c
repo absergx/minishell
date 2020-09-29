@@ -6,11 +6,11 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:50:11 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 18:01:24 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/29 19:20:20 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/minishell.h"
+#include "minishell.h"
 
 static int	ft_export_print(t_all *all)
 {
@@ -21,15 +21,14 @@ static int	ft_export_print(t_all *all)
 	while (all->envp[i])
 	{
 		ft_putstr_fd("declare -x ", 1);
-		if (ft_strchr(all->envp[i], '='))
+		if (ft_strlen(all->envp[i]) > 0 && ft_strchr(all->envp[i], '='))
 		{
-			j = -1;
+			j = 0;
 			while (all->envp[i][++j - 1] != '=')
 				ft_putchar_fd(all->envp[i][j], 1);
 			ft_putchar_fd("\"", 1);
 			ft_putstr_fd(&(all->envp[i][j + 1]), 1);
 			ft_putchar_fd("\"", 1);
-			++i;
 		}
 		else
 			ft_putstr_fd(all->envp[i], 1);
