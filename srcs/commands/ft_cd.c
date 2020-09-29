@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:26:48 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 13:57:42 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/29 18:02:45 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ static void	ft_cd_new_argv(t_all *all, char **new_argv)
 	int		i;
 
 	i = -1;
-	while (++i < all->parse.words_count)
+	while (all->argv[++i])
 		free(all->argv[i]);
 	free(all->argv);
 	all->argv = new_argv;
 	i = -1;
 	while (all->argv[i])
 		++i;
-	all->parse.word_count = i;
 }
 
 static int	ft_cd_write_argv(t_all *all, char *new_pwd, char *old_pwd)

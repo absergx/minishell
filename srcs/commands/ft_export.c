@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:50:11 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 15:27:56 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/29 18:01:24 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,32 @@ static void	ft_export_error(t_all *all, char *name)
 	ft_putstr_fd("': not a valid identifier\n", 2);
 }
 
+int			ft_export_add_new(t_all *all, char *new_line)
+{
+	char	**new_envp;
+	int		size;
+	int		i;
+
+	size = ft_strstrlen(all->envp);
+	if (!(new_envp = (char **)malloc(sizeof(char *) * (size + 2))))
+		return (0);
+	i = -1;
+	while (all->envp[++i])
+		new_envp[i] = all->envp[i];
+	new_envp[i] = new_line;
+	new_envp[++i] = NULL;
+	free(all->envp);
+	all->envp = new_envp;
+	return (1);
+}
+
 int			ft_export(t_all *all)
 {
 	int		i;
+	int		j;
 
 	i = 1;
-	if (all->parse.word_count == 1)
+	if (ft_strstrlen(all->argv) == 1)
 		return (ft_export_print(all));
 	while (all->argv[i])
 	{
@@ -80,7 +100,15 @@ int			ft_export(t_all *all)
 			ft_export_error(all, all->argv[i]);
 		else
 		{
-			
+			if ((j = ft_get_envp_key(all, name)) != -1)
+			{
+				free(all->envp[j]);
+				all->envp[j] = ft_strdup(all->argv[i]);
+			}
+			else
+				ft_export_add_new(all, all->argv[i]);
 		}
+		++i;
 	}
+	return (errno);
 }
