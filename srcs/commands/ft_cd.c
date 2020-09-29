@@ -6,24 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:26:48 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 12:14:39 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/29 13:57:42 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-# include <sys/types.h>
-# include <dirent.h>
-# include <sys/stat.h>
-# include <time.h>
-# include <sys/wait.h>
-# include <stdlib.h>
-# include <math.h>
-# include <errno.h>
-#include <stdio.h>
+#include "minishell.h"
 
-//#include "minishell.h"
-
-void	ft_cd_new_argv(t_all *all, char **new_argv)
+static void	ft_cd_new_argv(t_all *all, char **new_argv)
 {
 	int		i;
 
@@ -38,11 +27,28 @@ void	ft_cd_new_argv(t_all *all, char **new_argv)
 	all->parse.word_count = i;
 }
 
-int		ft_cd(t_all *all)
+static int	ft_cd_write_argv(t_all *all, char *new_pwd, char *old_pwd)
 {
-	char	*new_pwd;
 	char	**new_argv;
 
+	new_argv = (char **)malloc(sizeof(char *) * 4);
+	if (!(new_argv[0] = ft_strdup("export"))
+	&& !(new_argv[1] = ft_strjoin("PWD=", new_pwd))
+	&& !(new_argv[2] = ft_strjoin("OLDPWD=", old_pwd))
+	&& !(new_argv[3] = NULL))
+		return (errno);
+	ft_cd_new_argv(all, new_argv);
+	ft_export(all);
+	return (errno);
+}
+
+int			ft_cd(t_all *all)
+{
+	char	*new_pwd;
+	char	*old_pwd;
+	
+
+	getcwd(old_pwd, NULL);
 	if (all->parse.word_count == 1)
 		chdir(ft_get_envp_value(all, "HOME"));
 	else
@@ -50,13 +56,11 @@ int		ft_cd(t_all *all)
 	if (!errno)
 	{
 		getcwd(new_pwd, NULL);
-		new_argv = (char **)malloc(sizeof(char *) * 4);
-		new_argv[0] = ft_strdup("export");
-		new_argv[1] = ft_strdup("PWD");
-		new_argv[2] = new_pwd;
-		new_argv[3] = NULL;
-		ft_cd_new_argv(all, new_argv);
-		ft_export(all);
+		ft_cd_write_argv(all, new_pwd, old_pwd);
+		if (new_pwd)
+			free(new_pwd);
 	}
+	if (old_pwd)
+		free(old_pwd);
 	return (errno);
 }
