@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/24 17:35:02 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 11:45:03 by memilio          ###   ########.fr       */
+/*   Created: 2020/09/28 19:58:23 by memilio           #+#    #+#             */
+/*   Updated: 2020/09/29 11:44:05 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,26 @@
 
 //#include "minishell.h"
 
-int		ft_pwd(t_all *all)
+int		ft_echo(t_all *all)
 {
-	char	*path;
+	int		i;
+	int		f;
 
-	if ((path = getcwd(NULL, 0)))
+	i = 1;
+	f = 1;
+	if (!ft_strncmp(all->argv[i], "-n", 3))
 	{
-		ft_putstr_fd(path, 1);
-		free(path);
+		f = 0;
+		++i;
 	}
-	(void)all;
+	while (all->argv[i])
+	{
+		ft_putstr_fd(all->argv[i], i);
+		++i;
+		if (all->argv[i])
+			ft_putchar_fd(' ', 1);
+	}
+	if (f)
+		ft_putchar_fd('\n', 1);
 	return (errno);
 }
