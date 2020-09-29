@@ -92,25 +92,42 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 
 	tmp = 1;
 	len = 0;
-	while (line[tmp] != ' ' && line[tmp] != '"')
+	while (line[tmp] != ' ' && line[tmp] != '"' && line[tmp])
 	{
 		++tmp;
 		++len;
 	}
 	word = ft_substr(line, 1, len);
-	printf("word - %s\n", word);
 	res = ft_get_envp_value(all, word);
-	printf("res - %s\n", res);
 	free(word);
 	*i += len + 1;
 	return (res);
 }
 
+char	*ft_env_res(char *line, int *i, t_all *all, char **word)
+{
+	char *temp;
+	int j = 0;
+
+	temp = ft_get_env(line + *i, i, all);
+	if (!temp)
+		*word = ft_add_symbol(*word, 0);
+	else
+	{
+		while (temp[j])
+		{
+			*word = ft_add_symbol(*word, temp[j]);
+			++j;
+		}
+		free(temp);
+		temp = NULL;
+	}
+	return (NULL);
+}
+
 int 	ft_double_quote(char *line, char **word, t_all *all)
 {
 	int i = 1;
-	int j = 0;
-	char *temp;
 
 	if (line[i] == '"')
 	{
@@ -124,19 +141,7 @@ int 	ft_double_quote(char *line, char **word, t_all *all)
 			++i;
 		else if (line[i] == '$')
 		{
-			temp = ft_get_env(line + i, &i, all);
-			if (!temp)
-				*word = ft_add_symbol(*word, 0);
-			else
-			{
-				while (temp[j])
-				{
-					*word = ft_add_symbol(*word, temp[j]);
-					++j;
-				}
-				free(temp);
-				temp = NULL;
-			}
+			ft_env_res(line, &i, all, word);
 			if (line[i] == '"')
 				break;
 		}
@@ -188,6 +193,20 @@ int		ft_parse(char *line, t_all *all)
 			if (all->parse.word_count == all->size_argv - 1)
 				ft_realloc_argv(all);
 			++i;
+		}
+		else if (line[i] == '\\')
+		{
+			++i;
+			word = ft_add_symbol(word, line[i]);
+			++i;
+		}
+		else if (line[i] == '$')
+		{
+			ft_env_res(line, &i, all, &word);
+		}
+		else if (line[i] == ';')
+		{
+			ft_execute(all);
 		}
 		else
 		{

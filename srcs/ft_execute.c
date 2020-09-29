@@ -46,3 +46,9 @@
 //	free(all->str);
 //	all->str = ft_init_str();
 //}
+
+int 	ft_execute(t_all *all)
+{
+	errno = 0;
+	
+}
