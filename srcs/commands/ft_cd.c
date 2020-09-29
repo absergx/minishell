@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:26:48 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 18:02:45 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/29 18:10:46 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			ft_cd(t_all *all)
 	
 
 	getcwd(old_pwd, NULL);
-	if (all->parse.word_count == 1)
+	if (ft_strstrlen(all->argv) == 1)
 		chdir(ft_get_envp_value(all, "HOME"));
 	else
 		chdir(all->argv[1]);
