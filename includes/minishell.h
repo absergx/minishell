@@ -51,5 +51,20 @@ int		ft_exit(t_all *all);
 int		ft_export(t_all *all);
 int		ft_pwd(t_all *all);
 int		ft_unset(t_all *all);
+int 	ft_realloc_argv(t_all *all);
+char 	*ft_add_symbol(char *word, char c);
+int 	ft_single_quote(char *line, char **word);
+char	*ft_get_env(char *line, int *i, t_all *all);
+char	*ft_env_res(char *line, int *i, t_all *all, char **word);
+int 	ft_double_quote(char *line, char **word, t_all *all);
+int		ft_pipe(t_all *all);
+int		ft_create_file(t_all *all, char **word, int *file_name);
+int 	ft_add_word_in_argv(t_all *all, char **word);
+int 	ft_new_argv(t_all *all);
+int 	ft_execute_or_pipe(t_all *all, int (*func)(t_all *all), char **word, char *line);
+int 	ft_quotes(t_all *all, char *line, char **word);
+int 	ft_find_pipe_or_exec(t_all *all, char **word, char *line);
+int 	ft_redir_right(t_all *all, char *line);
+int 	ft_check_symbol(t_all *all, char *line, char **word);
 
 #endif

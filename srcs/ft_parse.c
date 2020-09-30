@@ -269,13 +269,12 @@ int 	ft_redir_right(t_all *all, char *line)
 {
 	int i;
 	char *word;
-	char *temp;
 	int file_name = 1;
 
 	word = NULL;
 	i = 0;
-	temp = ft_strtrim(line, " ");
-	line = temp;
+	while (line[i] && line[i] == ' ')
+		++i;
 	while (1)
 	{
 		if (line[i] == '|' || line[i] == ';' || line[i] == 0)
@@ -322,7 +321,35 @@ int 	ft_redir_right(t_all *all, char *line)
 			++i;
 		}
 	}
-	return (i + 2);
+	return (i + 1);
+}
+
+int 	ft_check_symbol(t_all *all, char *line, char **word)
+{
+	int i;
+
+	i = 0;
+	if (line[i] == ' ')
+	{
+		ft_add_word_in_argv(all, word);
+		++i;
+	}
+	else if (line[i] == '\\')
+	{
+		*word = ft_add_symbol(*word, line[i + 1]);
+		i += 2;
+	}
+	else if (line[i] == ';' || line[i] == '|')
+	{
+		i += ft_find_pipe_or_exec(all, word, line + i);
+	}
+	else if (line[i] == '>')
+	{
+		if (*word)
+			ft_add_word_in_argv(all, word);
+		i += ft_redir_right(all, line + i + 1);
+	}
+	return (i);
 }
 
 int		ft_parse(char *line, t_all *all)
@@ -351,30 +378,34 @@ int		ft_parse(char *line, t_all *all)
 		{
 			i += ft_quotes(all, line + i, &word);
 		}
-		else if (line[i] == ' ')
+		else if (line[i] == ' ' || line[i] == '\\' || line[i] == '>' || line[i] == ';' || line[i] == '|')
 		{
-			ft_add_word_in_argv(all, &word);
-			++i;
+			i += ft_check_symbol(all, line + i, &word);
 		}
-		else if (line[i] == '\\')
-		{
-			word = ft_add_symbol(word, line[i + 1]);
-			i += 2;
-		}
+//		else if (line[i] == ' ')
+//		{
+//			ft_add_word_in_argv(all, &word);
+//			++i;
+//		}
+//		else if (line[i] == '\\')
+//		{
+//			word = ft_add_symbol(word, line[i + 1]);
+//			i += 2;
+//		}
 		else if (line[i] == '$')
 		{
 			ft_env_res(line, &i, all, &word);
 		}
-		else if (line[i] == ';' || line[i] == '|')
-		{
-			i += ft_find_pipe_or_exec(all, &word, line + i);
-		}
-		else if (line[i] == '>')
-		{
-			if (word)
-				ft_add_word_in_argv(all, &word);
-			i += ft_redir_right(all, line + i + 1);
-		}
+//		else if (line[i] == ';' || line[i] == '|')
+//		{
+//			i += ft_find_pipe_or_exec(all, &word, line + i);
+//		}
+//		else if (line[i] == '>')
+//		{
+//			if (word)
+//				ft_add_word_in_argv(all, &word);
+//			i += ft_redir_right(all, line + i + 1);
+//		}
 		else
 		{
 			word = ft_add_symbol(word, line[i]);
