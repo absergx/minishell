@@ -6,26 +6,25 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:43:28 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 20:04:04 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/30 17:30:14 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit_error(char *line, int f)
+static void	ft_exit_error(char *line, int f)
 {
-	ft_putendl_fd("exit", 1);
-	ft_putstr_fd("minishell: exit: ", 1);
+	ft_putstr_fd("minishell: exit: ", 2);
 	if (!f && line)
 	{
-		ft_putstr_fd(line, 1);
-		ft_putendl_fd(": numeric argument required", 1);
+		ft_putstr_fd(line, 2);
+		ft_putendl_fd(": numeric argument required", 2);
 	}
 	else if (f == 1)
-		ft_putendl_fd("too many arguments", 1);
+		ft_putendl_fd("too many arguments", 2);
 }
 
-int		ft_exit_validate_arg(char *line)
+static int	ft_exit_validate_arg(char *line)
 {
 	int		j;
 
@@ -41,16 +40,17 @@ int		ft_exit_validate_arg(char *line)
 	return ((j > 0) ? 1 : 0);
 }
 
-int		ft_exit(t_all *all)
+int			ft_exit(t_all *all)
 {
 	int		argsize;
 	int		valid;
 
+	ft_putendl_fd("exit", 1);
 	if ((argsize = ft_strstrlen(all->argv)) == 1)
-		exit (0);
+		exit(0);
 	if ((valid = ft_exit_validate_arg(all->argv[1])) && argsize > 2)
 		ft_exit_error(NULL, 1);
-	else if (valid && argsize == 1)
+	else if (valid && argsize == 2)
 		exit(ft_atoi(all->argv[1]));
 	else if (!valid)
 	{

@@ -6,22 +6,11 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:58:23 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 11:44:05 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/30 13:31:16 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-# include <sys/types.h>
-# include <dirent.h>
-# include <sys/stat.h>
-# include <time.h>
-# include <sys/wait.h>
-# include <stdlib.h>
-# include <math.h>
-# include <errno.h>
-#include <stdio.h>
-
-//#include "minishell.h"
+#include "minishell.h"
 
 int		ft_echo(t_all *all)
 {

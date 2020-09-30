@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:50:11 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 19:20:20 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/30 17:29:25 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,28 @@ static int	ft_export_print(t_all *all)
 {
 	int		i;
 	int		j;
-	char	*pntr;
 
-	while (all->envp[i])
+	i = -1;
+	while (all->envp[++i])
 	{
 		ft_putstr_fd("declare -x ", 1);
 		if (ft_strlen(all->envp[i]) > 0 && ft_strchr(all->envp[i], '='))
 		{
 			j = 0;
-			while (all->envp[i][++j - 1] != '=')
-				ft_putchar_fd(all->envp[i][j], 1);
-			ft_putchar_fd("\"", 1);
-			ft_putstr_fd(&(all->envp[i][j + 1]), 1);
-			ft_putchar_fd("\"", 1);
+			while (all->envp[i][j - 1] != '=')
+				ft_putchar_fd(all->envp[i][j++], 1);
+			ft_putchar_fd('"', 1);
+			ft_putstr_fd(&(all->envp[i][j]), 1);
+			ft_putchar_fd('"', 1);
 		}
 		else
 			ft_putstr_fd(all->envp[i], 1);
-		ft_putchar_fd('\n');
-		++i;
+		ft_putchar_fd('\n', 1);
 	}
 	return (errno);
 }
 
-int			ft_export_check_name(char *name)
+static int	ft_export_check_name(char *name)
 {
 	int		i;
 	int		f;
@@ -66,7 +65,7 @@ static void	ft_export_error(t_all *all, char *name)
 	ft_putstr_fd("': not a valid identifier\n", 2);
 }
 
-int			ft_export_add_new(t_all *all, char *new_line)
+static int	ft_export_add_new(t_all *all, char *new_line)
 {
 	char	**new_envp;
 	int		size;
@@ -99,7 +98,7 @@ int			ft_export(t_all *all)
 			ft_export_error(all, all->argv[i]);
 		else
 		{
-			if ((j = ft_get_envp_key(all, name)) != -1)
+			if ((j = ft_get_envp_key(all, all->argv[i])) != -1)
 			{
 				free(all->envp[j]);
 				all->envp[j] = ft_strdup(all->argv[i]);
