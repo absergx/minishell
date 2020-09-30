@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/28 14:02:56 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/30 18:50:13 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,13 @@ int		ft_parse(char *line, t_all *all);
 char	*ft_get_envp_value(t_all *all, char *name);
 int 	ft_execute(t_all *all);
 void	print_argv(char **argv);
+int		ft_get_envp_key(t_all *all, char *name);
+int		ft_cd(t_all *all);
+int		ft_echo(t_all *all);
+int		ft_env(t_all *all);
+int		ft_exit(t_all *all);
+int		ft_export(t_all *all);
+int		ft_pwd(t_all *all);
+int		ft_unset(t_all *all);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/30 18:53:17 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/30 16:59:08 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,39 +25,63 @@ char	*get_line(void)
 int		main(int argc, char **argv, char **envp)
 {
 	int		status;
-	char	*line;
+	// char	*line;
 	t_all	all;
+	char	**new_argv;
 	int		i;
 
 	all.envp = (char **)malloc(sizeof(char *) * (ft_strstrlen(envp) + 1));
-	i = -1;
-	while (envp[++i])
+	i = 0;
+	while (envp[i])
+	{
 		all.envp[i] = ft_strdup(envp[i]);
-	all.envp[i] = NULL;
+		++i;
+	}
 	status = 1;
 	dup2(0, 3);
 	dup2(1, 4);
-	while (status)
+	new_argv = (char **)malloc(sizeof(char *) * ft_strstrlen(argv));
+	i = 0;
+	while (i < argc - 1)
 	{
-		ft_putstr_fd("> ", 1);
-		if (!(line = get_line()))
-			continue ;
-		all.parse.word_s = 0;
-		if (!(all.argv = ft_calloc(2, sizeof(char *))))
-			return (0);
-		all.size_argv = 2;
-		all.parse.word_e = 0;
-		all.parse.word_count = 0;
-		all.parse.quotes = 0;
-		all.parse.space_before = 0;
-		ft_parse(line, &all);
-		// ft_minishell(line, &all);
-		dup2(3, 0);
-		dup2(4, 1);
-		if (!ft_strcmp(line, "exit"))
-			status = 0;
+		new_argv[i] = argv[i + 1];
+		++i;
 	}
+	new_argv[i] = NULL;
+	all.argv = new_argv;
+	if (!ft_strcmp(all.argv[0], "exit"))
+		ft_exit(&all);
+	else if (!ft_strcmp(all.argv[0], "cd"))
+	{
+		ft_cd(&all);
+		ft_pwd(&all);
+		printf("-----------------------------------\n");
+		ft_env(&all);
+	}
+	else if (!ft_strcmp(all.argv[0], "echo"))
+		ft_echo(&all);
+	else if (!ft_strcmp(all.argv[0], "env"))
+		ft_env(&all);
+	else if (!ft_strcmp(all.argv[0], "export"))
+	{
+		ft_export(&all);
+		printf("-----------------------------------\n");
+		printf("-----------------------------------\n");
+		printf("-----------------------------------\n");
+		ft_env(&all);
+	}
+	else if (!ft_strcmp(all.argv[0], "pwd"))
+		ft_pwd(&all);
+	else if (!ft_strcmp(all.argv[0], "unset"))
+	{
+		ft_unset(&all);
+		printf("-----------------------------------\n");
+		printf("-----------------------------------\n");
+		printf("-----------------------------------\n");
+		ft_env(&all);
+	}
+	else
+		ft_putendl_fd("unknown command", 1);
 	(void)argc;
-	(void)argv;
 	return (0);
 }

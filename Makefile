@@ -6,7 +6,7 @@
 #    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/17 17:45:53 by memilio           #+#    #+#              #
-#    Updated: 2020/09/25 21:08:52 by memilio          ###   ########.fr        #
+#    Updated: 2020/09/30 18:50:53 by memilio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,14 @@ NAME	=	minishell
 FUNC	=	main.c \
 			ft_parse.c \
 			ft_envp_processing.c \
-			ft_execute.c
+			ft_execute.c \
+			commands/ft_cd.c \
+			commands/ft_echo.c \
+			commands/ft_env.c \
+			commands/ft_exit.c \
+			commands/ft_export.c \
+			commands/ft_pwd.c \
+			commands/ft_unset.c
 SRC_DIR	=	./srcs/
 SRC		=	$(addprefix $(SRC_DIR), $(FUNC))
 INC		=	-I./includes/ -I$(LFT_DIR)
