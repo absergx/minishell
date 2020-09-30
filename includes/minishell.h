@@ -18,6 +18,7 @@
 # include "libft.h"
 # include <stdio.h>
 # include <fcntl.h>
+# include <errno.h>
 
 typedef struct	s_parse
 {
@@ -35,9 +36,12 @@ typedef struct  s_all
 	char		**argv;
 	char 		**envp;
 	int 		size_argv;
+	int 		status;
 }               t_all;
 
 int		ft_parse(char *line, t_all *all);
 char	*ft_get_envp_value(t_all *all, char *name);
+int 	ft_execute(t_all *all);
+void	print_argv(char **argv);
 
 #endif
