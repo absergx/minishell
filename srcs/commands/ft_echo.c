@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:58:23 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/30 13:31:16 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/30 20:00:02 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_echo(t_all *all)
 	}
 	while (all->argv[i])
 	{
-		ft_putstr_fd(all->argv[i], i);
+		ft_putstr_fd(all->argv[i], 1);
 		++i;
 		if (all->argv[i])
 			ft_putchar_fd(' ', 1);
