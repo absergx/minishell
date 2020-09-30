@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:50:11 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/30 17:29:25 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/30 19:15:03 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,17 @@ int			ft_export(t_all *all)
 	int		i;
 	int		j;
 
-	i = 1;
+	i = 0;
 	if (ft_strstrlen(all->argv) == 1)
 		return (ft_export_print(all));
-	while (all->argv[i])
+	while (all->argv[++i])
 	{
 		if (!ft_export_check_name(all->argv[i]))
 			ft_export_error(all, all->argv[i]);
 		else
 		{
-			if ((j = ft_get_envp_key(all, all->argv[i])) != -1)
+			if (((j = ft_get_envp_key(all, all->argv[i])) != -1)
+				&& (ft_strchr(all->argv[i], '=')))
 			{
 				free(all->envp[j]);
 				all->envp[j] = ft_strdup(all->argv[i]);
@@ -106,7 +107,6 @@ int			ft_export(t_all *all)
 			else
 				ft_export_add_new(all, all->argv[i]);
 		}
-		++i;
 	}
 	return (errno);
 }
