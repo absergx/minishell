@@ -6,8 +6,8 @@ int		ft_execute_our(t_all *all)
 		return (ft_exit(all));
 	else if (!ft_strcmp(all->argv[0], "cd"))
 		return (ft_cd(all));
-//	else if (!ft_strcmp(all->argv[0], "echo"))
-//		return (ft_echo(all));
+	else if (!ft_strcmp(all->argv[0], "echo"))
+		return (ft_echo(all));
 	else if (!ft_strcmp(all->argv[0], "env"))
 		return (ft_env(all));
 	else if (!ft_strcmp(all->argv[0], "export"))

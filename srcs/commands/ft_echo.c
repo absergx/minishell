@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:58:23 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/30 20:00:02 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/30 21:02:47 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,20 @@ int		ft_echo(t_all *all)
 
 	i = 1;
 	f = 1;
-	if (!ft_strncmp(all->argv[i], "-n", 3))
+	if (all->argv[i])
 	{
-		f = 0;
-		++i;
-	}
-	while (all->argv[i])
-	{
-		ft_putstr_fd(all->argv[i], 1);
-		++i;
-		if (all->argv[i])
-			ft_putchar_fd(' ', 1);
+		if (!ft_strncmp(all->argv[i], "-n", 3))
+		{
+			f = 0;
+			++i;
+		}
+		while (all->argv[i])
+		{
+			ft_putstr_fd(all->argv[i], 1);
+			++i;
+			if (all->argv[i])
+				ft_putchar_fd(' ', 1);
+		}
 	}
 	if (f)
 		ft_putchar_fd('\n', 1);
