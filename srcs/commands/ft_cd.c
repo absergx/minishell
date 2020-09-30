@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:26:48 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 18:10:46 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/30 12:19:07 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ static void	ft_cd_new_argv(t_all *all, char **new_argv)
 		free(all->argv[i]);
 	free(all->argv);
 	all->argv = new_argv;
-	i = -1;
-	while (all->argv[i])
-		++i;
 }
 
 static int	ft_cd_write_argv(t_all *all, char *new_pwd, char *old_pwd)

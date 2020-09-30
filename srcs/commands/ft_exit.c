@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:43:28 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 19:55:07 by memilio          ###   ########.fr       */
+/*   Updated: 2020/09/29 20:04:04 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ int		ft_exit_validate_arg(char *line)
 	int		j;
 
 	j = 0;
-	if (line[j] == '-' || line[j] == '+')
-		++j;
+	if (*line == '-' || *line == '+')
+		line++;
 	while (line[j])
 	{
 		if (!ft_isdigit(line[j]))
 			return (0);
 		++j;
 	}
-	return (1);
+	return ((j > 0) ? 1 : 0);
 }
 
 int		ft_exit(t_all *all)
