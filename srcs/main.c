@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/01 14:08:00 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/01 14:38:53 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,20 @@ int		ft_clone_envp(char **envp, t_all *all)
 	return (1);
 }
 
+void	ft_promt(void)
+{
+	char	*path;
+
+	path = NULL;
+	if ((path = getcwd(NULL, 0)))
+	{
+		ft_putstr_fd("\033[38;5;46mminishell: ~", 1);
+		ft_putstr_fd(path, 1);
+		ft_putstr_fd("> \033[0m", 1);
+		free(path);
+	}
+}
+
 int		main(int argc, char **argv, char **envp)
 {
 	char	*line;
@@ -68,7 +82,7 @@ int		main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, ft_quit);
 	while (1)
 	{
-		ft_putstr_fd("> ", 1);
+		ft_promt();
 		if (!(line = get_line(0)))
 			ft_eof();
 		all.parse.word_s = 0;

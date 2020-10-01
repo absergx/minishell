@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/01 14:09:09 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/01 14:39:43 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int 	ft_check_symbol(t_all *all, char *line, char **word);
 void	ft_eof(void);
 void	ft_sigint(int sig);
 void	ft_quit(int sig);
+void	ft_promt(void);
 
 #endif
