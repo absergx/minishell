@@ -37,7 +37,7 @@ int 	ft_execute(t_all *all)
 	free(temp);
 	path = ft_split(temp, ':');
 	errno = 0;
-	all->status = 0;
+	g_status = 0;
 	res = NULL;
 	while (path[i])
 	{
