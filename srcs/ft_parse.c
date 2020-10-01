@@ -84,7 +84,7 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 	tmp = 1;
 	len = 0;
 	while (line[tmp] != ' ' && line[tmp] != '"' && line[tmp] \
-			&& !ft_strchr("|<>;\\=$", line[tmp]))
+			&& !ft_strchr("|<>;\\=$'", line[tmp]))
 	{
 		++tmp;
 		++len;
@@ -181,14 +181,32 @@ int		ft_pipe(t_all *all)
 	return (1);
 }
 
-int		ft_create_file(t_all *all, char **word, int *file_name)
+int		ft_create_file(t_all *all, char **word, int *file_name, char *redir)
 {
 	int fd;
 
-	fd = open(*word, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	all->fds[1] = fd;
-	// Добавить проверку создания файла
-	dup2(all->fds[1], 1);
+	fd = 0;
+	// Закрывать предыдущие открытые файлы
+	if (!ft_strcmp("right", redir))
+		fd = open(*word, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	else if (!ft_strcmp("left", redir))
+		fd = open(*word, O_RDONLY);
+	else
+		fd = open(*word, O_CREAT | O_APPEND | O_WRONLY, 0644);
+	if (fd < 0)
+		fd = -1; // Добавить ошибку
+	if (!ft_strcmp("left", redir))
+	{
+		all->fds[0] = fd;
+		// Добавить проверку создания файла
+		dup2(all->fds[0], 0);
+	}
+	else
+	{
+		all->fds[1] = fd;
+		// Добавить проверку создания файла
+		dup2(all->fds[1], 1);
+	}
 	*file_name = 0;
 	free(*word);
 	*word = 0;
@@ -272,55 +290,31 @@ int 	ft_find_pipe_or_exec(t_all *all, char **word, char *line)
 	return (i);
 }
 
-int 	ft_redir_right(t_all *all, char *line)
+int 	ft_redir(t_all *all, char *line, char *redir)
 {
 	int i;
 	char *word;
 	int file_name = 1;
 
 	word = NULL;
-	i = 0;
+	i = 1;
+	if (line[i] == '>')
+	{
+		i = 2;
+		redir = "double_redir";
+	}
 	while (line[i] && line[i] == ' ')
 		++i;
+	if (line[i] == '>' || line[i] == '<')
+		return (i); // Добавить ошибку
 	while (1)
 	{
-		if (line[i] == '|' || line[i] == ';' || line[i] == 0)
+		if (ft_strchr("| ;><", line[i]) || line[i] == 0)
 		{
-			if (file_name)
-				ft_create_file(all, &word, &file_name);
-			else if (word)
-				ft_add_word_in_argv(all, &word);
+			ft_create_file(all, &word, &file_name, redir);
+			if (line[i] == ' ')
+				++i;
 			break;
-		}
-		if (line[i] == '\'' || line[i] == '"')
-		{
-			i += ft_quotes(all, line + i, &word);
-		}
-		else if (line[i] == ' ')
-		{
-			if (file_name)
-				ft_create_file(all, &word, &file_name);
-			else
-				ft_add_word_in_argv(all, &word);
-			++i;
-		}
-		else if (line[i] == '\\')
-		{
-			++i;
-			word = ft_add_symbol(word, line[i]);
-			++i;
-		}
-		else if (line[i] == '>')
-		{
-			if (word && !file_name)
-				ft_add_word_in_argv(all, &word);
-			if (file_name)
-			{
-				ft_create_file(all, &word, &file_name);
-				free(word);
-				word = 0;
-			}
-			i += ft_redir_right(all, line + i + 1);
 		}
 		else
 		{
@@ -328,7 +322,7 @@ int 	ft_redir_right(t_all *all, char *line)
 			++i;
 		}
 	}
-	return (i + 1);
+	return (i);
 }
 
 int 	ft_check_symbol(t_all *all, char *line, char **word)
@@ -354,7 +348,13 @@ int 	ft_check_symbol(t_all *all, char *line, char **word)
 	{
 		if (*word)
 			ft_add_word_in_argv(all, word);
-		i += ft_redir_right(all, line + i + 1);
+		i += ft_redir(all, line + i, "right");
+	}
+	else if (line[i] == '<')
+	{
+		if (*word)
+			ft_add_word_in_argv(all, word);
+		i += ft_redir(all, line + i, "left");
 	}
 	return (i);
 }

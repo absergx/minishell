@@ -105,6 +105,8 @@ int		main(int argc, char **argv, char **envp)
 		if (!ft_strlen(line))
 			continue ;
 		all.parse.word_s = 0;
+		all.fds[0] = 0;
+		all.fds[1] = 1;
 		if (!(all.argv = ft_calloc(2, sizeof(char *))))
 			return (0);
 		all.size_argv = 2;

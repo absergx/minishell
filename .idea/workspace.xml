@@ -13,7 +13,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c3730f52-3073-4281-b041-1578f9c9b935" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/minishell.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/ft_parse.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ft_parse.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/main.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,9 +53,19 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="minishell" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="minishell" TARGET_NAME="minishell" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="minishell" RUN_TARGET_NAME="minishell">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
@@ -86,7 +98,7 @@
       <workItem from="1601482122672" duration="6073000" />
       <workItem from="1601556808756" duration="2000" />
       <workItem from="1601556822398" duration="122000" />
-      <workItem from="1601559078415" duration="901000" />
+      <workItem from="1601559078415" duration="8503000" />
     </task>
     <servers />
   </component>
@@ -97,38 +109,38 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="2518" height="477" key="GridCell.Tab.0.bottom" timestamp="1601490871464">
+    <state width="2518" height="477" key="GridCell.Tab.0.bottom" timestamp="1601564729916">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.0.bottom/0.23.2560.1359@0.23.2560.1359" timestamp="1601490871464" />
-    <state width="2518" height="477" key="GridCell.Tab.0.center" timestamp="1601490871463">
+    <state width="2518" height="477" key="GridCell.Tab.0.bottom/0.23.2560.1359@0.23.2560.1359" timestamp="1601564729916" />
+    <state width="2518" height="477" key="GridCell.Tab.0.center" timestamp="1601564729915">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.0.center/0.23.2560.1359@0.23.2560.1359" timestamp="1601490871463" />
-    <state width="2518" height="477" key="GridCell.Tab.0.left" timestamp="1601490871463">
+    <state width="2518" height="477" key="GridCell.Tab.0.center/0.23.2560.1359@0.23.2560.1359" timestamp="1601564729915" />
+    <state width="2518" height="477" key="GridCell.Tab.0.left" timestamp="1601564729914">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.0.left/0.23.2560.1359@0.23.2560.1359" timestamp="1601490871463" />
-    <state width="2518" height="477" key="GridCell.Tab.0.right" timestamp="1601490871464">
+    <state width="2518" height="477" key="GridCell.Tab.0.left/0.23.2560.1359@0.23.2560.1359" timestamp="1601564729914" />
+    <state width="2518" height="477" key="GridCell.Tab.0.right" timestamp="1601564729915">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.0.right/0.23.2560.1359@0.23.2560.1359" timestamp="1601490871464" />
-    <state width="2518" height="477" key="GridCell.Tab.1.bottom" timestamp="1601490871466">
+    <state width="2518" height="477" key="GridCell.Tab.0.right/0.23.2560.1359@0.23.2560.1359" timestamp="1601564729915" />
+    <state width="2518" height="477" key="GridCell.Tab.1.bottom" timestamp="1601564729917">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.1.bottom/0.23.2560.1359@0.23.2560.1359" timestamp="1601490871466" />
-    <state width="2518" height="477" key="GridCell.Tab.1.center" timestamp="1601490871465">
+    <state width="2518" height="477" key="GridCell.Tab.1.bottom/0.23.2560.1359@0.23.2560.1359" timestamp="1601564729917" />
+    <state width="2518" height="477" key="GridCell.Tab.1.center" timestamp="1601564729916">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.1.center/0.23.2560.1359@0.23.2560.1359" timestamp="1601490871465" />
-    <state width="2518" height="477" key="GridCell.Tab.1.left" timestamp="1601490871465">
+    <state width="2518" height="477" key="GridCell.Tab.1.center/0.23.2560.1359@0.23.2560.1359" timestamp="1601564729916" />
+    <state width="2518" height="477" key="GridCell.Tab.1.left" timestamp="1601564729916">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.1.left/0.23.2560.1359@0.23.2560.1359" timestamp="1601490871465" />
-    <state width="2518" height="477" key="GridCell.Tab.1.right" timestamp="1601490871465">
+    <state width="2518" height="477" key="GridCell.Tab.1.left/0.23.2560.1359@0.23.2560.1359" timestamp="1601564729916" />
+    <state width="2518" height="477" key="GridCell.Tab.1.right" timestamp="1601564729917">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.1.right/0.23.2560.1359@0.23.2560.1359" timestamp="1601490871465" />
+    <state width="2518" height="477" key="GridCell.Tab.1.right/0.23.2560.1359@0.23.2560.1359" timestamp="1601564729917" />
     <state x="0" y="23" width="2560" height="1359" key="SettingsEditor" timestamp="1601466674251">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
