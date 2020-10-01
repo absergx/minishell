@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/01 14:07:09 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/01 14:09:09 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct	s_parse
 	int			word_s;
 	int			word_e;
 	int			word_count;
-	int			quotes;
 	int 		space_before;
 }				t_parse;
 
