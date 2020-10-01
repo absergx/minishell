@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:50:11 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/01 14:45:04 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/01 14:53:57 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ static int	ft_export_print(t_all *all)
 	i = -1;
 	while (all->envp[++i])
 	{
+		if (ft_strlen(all->envp[i]) == 0)
+			continue ;
 		ft_putstr_fd("declare -x ", 1);
-		if (ft_strlen(all->envp[i]) > 0 && ft_strchr(all->envp[i], '='))
+		if (ft_strchr(all->envp[i], '='))
 		{
 			j = 0;
 			while (all->envp[i][j - 1] != '=')
