@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:50:11 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/01 14:53:57 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/01 16:57:17 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int			ft_export(t_all *all)
 				free(all->envp[j]);
 				all->envp[j] = ft_strdup(all->argv[i]);
 			}
-			else
+			else if (j == -1)
 				ft_export_add_new(all, all->argv[i]);
 		}
 	}
