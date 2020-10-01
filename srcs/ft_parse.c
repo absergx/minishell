@@ -257,6 +257,8 @@ int 	ft_find_pipe_or_exec(t_all *all, char **word, char *line)
 	if (line[i] == ';')
 	{
 		i += ft_execute_or_pipe(all, &ft_execute, word, line + i);
+		dup2(3, 0);
+		dup2(4, 1);
 	}
 	else if (line[i] == '|')
 	{
@@ -355,16 +357,10 @@ int 	ft_check_symbol(t_all *all, char *line, char **word)
 int		ft_parse(char *line, t_all *all)
 {
 	char	*word;
-	char	*temp;
 	int		i;
 
 	word = NULL;
 	i = 0;
-	if (!line)
-		return (0);
-	temp = ft_strtrim(line, " ");
-	free(line);
-	line = temp;
 	while (1)
 	{
 		if (line[i] == 0)
@@ -378,34 +374,14 @@ int		ft_parse(char *line, t_all *all)
 		{
 			i += ft_quotes(all, line + i, &word);
 		}
-		else if (line[i] == ' ' || line[i] == '\\' || line[i] == '>' || line[i] == ';' || line[i] == '|')
+		else if (ft_strchr(" \\<>;|", line[i]))
 		{
 			i += ft_check_symbol(all, line + i, &word);
 		}
-//		else if (line[i] == ' ')
-//		{
-//			ft_add_word_in_argv(all, &word);
-//			++i;
-//		}
-//		else if (line[i] == '\\')
-//		{
-//			word = ft_add_symbol(word, line[i + 1]);
-//			i += 2;
-//		}
 		else if (line[i] == '$')
 		{
 			ft_env_res(line, &i, all, &word);
 		}
-//		else if (line[i] == ';' || line[i] == '|')
-//		{
-//			i += ft_find_pipe_or_exec(all, &word, line + i);
-//		}
-//		else if (line[i] == '>')
-//		{
-//			if (word)
-//				ft_add_word_in_argv(all, &word);
-//			i += ft_redir_right(all, line + i + 1);
-//		}
 		else
 		{
 			word = ft_add_symbol(word, line[i]);
