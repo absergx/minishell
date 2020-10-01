@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/01 15:42:50 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/01 15:48:01 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,17 @@ void	ft_promt(void)
 
 	// if (enter == 0)
 	// {
-	// 	ft_putstr_fd(GREEN"!!!WET > "ENDCOLOR, 1);
+	// 	ft_putstr_fd(GREEN">>> WET <<< : "ENDCOLOR, 1);
 	// 	enter++;
 	// }
 	// else if (enter == 1)
 	// {
-	// 	ft_putstr_fd(RED"!!!ASS > "ENDCOLOR, 1);
+	// 	ft_putstr_fd(RED">>> ASS <<< : "ENDCOLOR, 1);
 	// 	enter++;
 	// }
 	// else if (enter == 2)
 	// {
-	// 	ft_putstr_fd(GREEN"!!!PUSSY > "ENDCOLOR, 1);
+	// 	ft_putstr_fd(GREEN">>> PUSSY <<< : "ENDCOLOR, 1);
 	// 	enter = 0;
 	// }
 }
