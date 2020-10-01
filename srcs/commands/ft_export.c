@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:50:11 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/01 13:57:03 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/01 14:45:04 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static int	ft_export_check_name(char *name)
 static void	ft_export_error(char *name)
 {
 	g_status = 1;
-	ft_putstr_fd("minishell: export: '", 2);
+	ft_putstr_fd(RED"minishell: export: '", 2);
 	ft_putstr_fd(name, 2);
-	ft_putstr_fd("': not a valid identifier\n", 2);
+	ft_putstr_fd("': not a valid identifier\n"ENDCOLOR, 2);
 }
 
 static int	ft_export_add_new(t_all *all, char *new_line)

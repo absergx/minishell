@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/01 14:38:53 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/01 14:46:07 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	ft_promt(void)
 	path = NULL;
 	if ((path = getcwd(NULL, 0)))
 	{
-		ft_putstr_fd("\033[38;5;46mminishell: ~", 1);
+		ft_putstr_fd(GREEN"minishell: ~", 1);
 		ft_putstr_fd(path, 1);
-		ft_putstr_fd("> \033[0m", 1);
+		ft_putstr_fd("> "ENDCOLOR, 1);
 		free(path);
 	}
 }

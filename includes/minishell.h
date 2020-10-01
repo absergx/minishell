@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/01 14:39:43 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/01 14:45:16 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <errno.h>
+
+# define RED "\033[38;5;160m"
+# define ENDCOLOR "\033[0m"
+# define GREEN "\033[38;5;46m"
 
 typedef struct	s_parse
 {
