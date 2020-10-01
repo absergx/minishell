@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/30 18:50:13 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/01 12:31:04 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ typedef struct  s_all
 	char		**argv;
 	char 		**envp;
 	int 		size_argv;
-	int 		status;
 }               t_all;
+
+int				g_status;
 
 int		ft_parse(char *line, t_all *all);
 char	*ft_get_envp_value(t_all *all, char *name);
@@ -66,5 +67,8 @@ int 	ft_quotes(t_all *all, char *line, char **word);
 int 	ft_find_pipe_or_exec(t_all *all, char **word, char *line);
 int 	ft_redir_right(t_all *all, char *line);
 int 	ft_check_symbol(t_all *all, char *line, char **word);
+void	ft_eof(void);
+void	ft_sigint(int sig);
+void	ft_quit(int sig);
 
 #endif

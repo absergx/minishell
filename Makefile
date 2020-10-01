@@ -6,7 +6,7 @@
 #    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/17 17:45:53 by memilio           #+#    #+#              #
-#    Updated: 2020/09/30 18:50:53 by memilio          ###   ########.fr        #
+#    Updated: 2020/10/01 11:21:02 by memilio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ FUNC	=	main.c \
 			commands/ft_exit.c \
 			commands/ft_export.c \
 			commands/ft_pwd.c \
-			commands/ft_unset.c
+			commands/ft_unset.c \
+			ft_handle_signal.c
 SRC_DIR	=	./srcs/
 SRC		=	$(addprefix $(SRC_DIR), $(FUNC))
 INC		=	-I./includes/ -I$(LFT_DIR)
