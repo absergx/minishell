@@ -84,7 +84,7 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 	tmp = 1;
 	len = 0;
 	while (line[tmp] != ' ' && line[tmp] != '"' && line[tmp] \
-			&& !ft_strchr("|<>;", line[tmp]))
+			&& !ft_strchr("|<>;\\=$", line[tmp]))
 	{
 		++tmp;
 		++len;
@@ -109,8 +109,10 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 char	*ft_env_res(char *line, int *i, t_all *all, char **word)
 {
 	char *temp;
-	int j = 0;
+	int j;
 
+	j = 0;
+	//($"'\=)/
 	temp = ft_get_env(line + *i, i, all);
 	if (!temp)
 		*word = ft_add_symbol(*word, 0);
@@ -129,8 +131,9 @@ char	*ft_env_res(char *line, int *i, t_all *all, char **word)
 
 int 	ft_double_quote(char *line, char **word, t_all *all)
 {
-	int i = 1;
+	int i;
 
+	i = 1;
 	if (line[i] == '"')
 	{
 		*word = ft_add_symbol(*word, 0);
@@ -156,8 +159,10 @@ int 	ft_double_quote(char *line, char **word, t_all *all)
 
 int		ft_pipe(t_all *all)
 {
+	int pid;
+
 	pipe(all->fds);
-	int pid = fork();
+	pid = fork();
 	if (pid == 0)
 	{
 		dup2(all->fds[1], 1);
