@@ -19,6 +19,13 @@ int		ft_execute_our(t_all *all)
 	return (-1);
 }
 
+int		ft_not_absolute_path(t_all *all)
+{
+	if (all->argv[0] && ft_strchr("./", all->argv[0][0]))
+		return (0);
+	return (1);
+}
+
 int 	ft_execute(t_all *all)
 {
 	char	**path;
@@ -41,27 +48,37 @@ int 	ft_execute(t_all *all)
 	errno = 0;
 	g_status = 0;
 	res = NULL;
-	while (path[i])
-	{
-		temp2 = ft_strjoin(path[i], "/");
-		temp = ft_strjoin(temp2, all->argv[0]);
-		if ((fd = open(temp, O_RDONLY)) > 0)
+	if (ft_not_absolute_path(all))
+		while (path[i])
 		{
-			res = temp;
-			break ;
+			temp2 = ft_strjoin(path[i], "/");
+			temp = ft_strjoin(temp2, all->argv[0]);
+			if ((fd = open(temp, O_RDONLY)) > 0)
+			{
+				res = temp;
+				break ;
+			}
+			free(temp);
+			free(temp2);
+			++i;
 		}
-		free(temp);
-		free(temp2);
-		++i;
-	}
 	if (!res)
 		res = all->argv[0];
+	fd = open(temp, O_RDONLY);
+	if (fd < 0)
+	{
+		errno = 2;
+		g_status = 127;
+		ft_putstr_fd(strerror(errno), 2); // Error
+		ft_putstr_fd("\n", 2);
+		return (1);
+	}
 	pid = fork();
 	if (pid == 0)
 	{
 		exit (execve(res, all->argv, all->envp));
 	}
 	else
-		wait(0);
+		wait(&g_status);
 	return (1);
 }
