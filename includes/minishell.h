@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/01 15:40:48 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/05 17:27:31 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <errno.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 # define RED "\033[38;5;160m"
 # define ENDCOLOR "\033[0m"
@@ -39,6 +41,7 @@ typedef struct  s_all
 	char		**argv;
 	char 		**envp;
 	int 		size_argv;
+	int			have_redir;
 }               t_all;
 
 int				g_status;

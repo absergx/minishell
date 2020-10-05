@@ -29,6 +29,8 @@ int 	ft_execute(t_all *all)
 	char 	*res;
 	int		pid;
 
+	if (all->argv[0] == 0)
+		return (1);
 	if ((i = ft_execute_our(all)) != -1)
 		return (i);
 	i = 0;

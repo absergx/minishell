@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
+/*   Updated: 2020/10/05 17:45:51 by casubmar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 
@@ -165,7 +177,8 @@ int		ft_pipe(t_all *all)
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(all->fds[1], 1);
+		if (!all->have_redir)
+			dup2(all->fds[1], 1);
 		ft_execute(all);
 		close(all->fds[0]);
 		close(all->fds[1]);
@@ -174,6 +187,11 @@ int		ft_pipe(t_all *all)
 	else
 	{
 		wait(0);
+		if (all->have_redir)
+		{
+			dup2(4, 1);
+			all->have_redir = 0;
+		}
 		dup2(all->fds[0], 0);
 		close(all->fds[1]);
 		close(all->fds[0]);
@@ -346,12 +364,14 @@ int 	ft_check_symbol(t_all *all, char *line, char **word)
 	}
 	else if (line[i] == '>')
 	{
+		all->have_redir = 1;
 		if (*word)
 			ft_add_word_in_argv(all, word);
 		i += ft_redir(all, line + i, "right");
 	}
 	else if (line[i] == '<')
 	{
+		all->have_redir = 1;
 		if (*word)
 			ft_add_word_in_argv(all, word);
 		i += ft_redir(all, line + i, "left");
@@ -365,6 +385,7 @@ int		ft_parse(char *line, t_all *all)
 	int		i;
 
 	word = NULL;
+	all->have_redir = 0;
 	i = 0;
 	while (1)
 	{
