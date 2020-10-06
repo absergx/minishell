@@ -64,7 +64,7 @@ int 	ft_execute(t_all *all)
 		}
 	if (!res)
 		res = all->argv[0];
-	fd = open(temp, O_RDONLY);
+	fd = open(res, O_RDONLY);
 	if (fd < 0)
 	{
 		errno = 2;
