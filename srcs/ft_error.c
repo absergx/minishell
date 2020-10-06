@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 16:20:13 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/06 16:27:30 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/06 14:58:57 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void check_exit_status(int status)
+{
+ if (WIFEXITED(status))
+  g_status = WEXITSTATUS(status);
+ else if (WIFSIGNALED(status))
+  g_status = WTERMSIG(status) + 128;
+}
 
 int		ft_error(char **argv, int errcode)
 {

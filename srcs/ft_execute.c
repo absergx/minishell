@@ -35,6 +35,7 @@ int 	ft_execute(t_all *all)
 	int 	fd;
 	char 	*res;
 	int		pid;
+	int		status;
 
 	errno = 0;
 	g_status = 0;
@@ -83,9 +84,10 @@ int 	ft_execute(t_all *all)
 	}
 	else
 	{
-		wait(&g_status);
+		wait(&status);
 		if (errno)
 			ft_error(all->argv, errno);
+		check_exit_status(status);
 	}
 	return (1);
 }
