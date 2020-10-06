@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/06 15:22:06 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/06 15:31:54 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -395,6 +395,8 @@ int		ft_parse(char *line, t_all *all)
 	word = NULL;
 	all->have_redir = 0;
 	i = 0;
+	while (line[i] && line[i] == ' ')
+		++i;
 	while (1)
 	{
 		if (line[i] == 0)
