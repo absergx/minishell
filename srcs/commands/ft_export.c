@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:50:11 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/05 20:02:49 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/06 16:14:28 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ static int	ft_export_add_new(t_all *all, char *new_line)
 	i = -1;
 	while (all->envp[++i])
 		new_envp[i] = all->envp[i];
-	new_envp[i] = new_line;
-	new_envp[++i] = NULL;
+	new_envp[i] = ft_strdup(new_line);
+	new_envp[i + 1] = NULL;
 	free(all->envp);
 	all->envp = new_envp;
 	return (1);

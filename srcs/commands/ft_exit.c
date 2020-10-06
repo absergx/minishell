@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:43:28 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/30 17:30:14 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/06 16:16:56 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			ft_exit(t_all *all)
 
 	ft_putendl_fd("exit", 1);
 	if ((argsize = ft_strstrlen(all->argv)) == 1)
-		exit(0);
+		exit(g_status);
 	if ((valid = ft_exit_validate_arg(all->argv[1])) && argsize > 2)
 		ft_exit_error(NULL, 1);
 	else if (valid && argsize == 2)
