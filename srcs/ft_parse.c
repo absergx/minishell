@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/06 14:43:46 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/06 15:22:06 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,7 +358,8 @@ int 	ft_check_symbol(t_all *all, char *line, char **word)
 	if (line[i] == ' ')
 	{
 		ft_add_word_in_argv(all, word);
-		++i;
+		while (line[i] && line[i] == ' ')
+			++i;
 	}
 	else if (line[i] == '\\')
 	{
