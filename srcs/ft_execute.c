@@ -50,8 +50,10 @@ int 	ft_execute(t_all *all)
 	i = 0;
 	fd = 0;
 	temp = ft_get_envp_value(all, "PATH");
-	free(temp);
+	if (!temp)
+		temp = ft_strdup("");
 	path = ft_split(temp, ':');
+	free(temp);
 	res = NULL;
 	if (ft_not_absolute_path(all))
 		while (path[i])
