@@ -36,17 +36,21 @@ int 	ft_execute(t_all *all)
 	char 	*res;
 	int		pid;
 
+	errno = 0;
+	g_status = 0;
 	if (all->argv[0] == 0)
 		return (1);
 	if ((i = ft_execute_our(all)) != -1)
+	{
+		if (errno)
+			ft_error(all->argv, errno);
 		return (i);
+	}
 	i = 0;
 	fd = 0;
 	temp = ft_get_envp_value(all, "PATH");
 	free(temp);
 	path = ft_split(temp, ':');
-	errno = 0;
-	g_status = 0;
 	res = NULL;
 	if (ft_not_absolute_path(all))
 		while (path[i])
@@ -69,8 +73,7 @@ int 	ft_execute(t_all *all)
 	{
 		errno = 2;
 		g_status = 127;
-		ft_putstr_fd(strerror(errno), 2); // Error
-		ft_putstr_fd("\n", 2);
+		ft_error(all->argv, errno);
 		return (1);
 	}
 	pid = fork();
@@ -79,6 +82,10 @@ int 	ft_execute(t_all *all)
 		exit (execve(res, all->argv, all->envp));
 	}
 	else
+	{
 		wait(&g_status);
+		if (errno)
+			ft_error(all->argv, errno);
+	}
 	return (1);
 }

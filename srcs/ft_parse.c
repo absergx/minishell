@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/05 17:45:51 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/06 14:43:46 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 
 	tmp = 1;
 	len = 0;
+	res = 0;
 	while (line[tmp] != ' ' && line[tmp] != '"' && line[tmp] \
 			&& !ft_strchr("|<>;\\=$'", line[tmp]))
 	{
@@ -102,6 +103,12 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 		++len;
 	}
 	word = ft_substr(line, 1, len);
+	if (!ft_strcmp("?", word))
+	{
+		res = ft_itoa(g_status);
+		*i += len + 1;
+		return (res);
+	}
 	if (!ft_isalnum(word[0]))
 	{
 		c = word[0];
