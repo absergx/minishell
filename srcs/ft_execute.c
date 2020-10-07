@@ -36,6 +36,7 @@ int 	ft_execute(t_all *all)
 	char 	*res;
 	int		pid;
 	int		status;
+	int		is_relative;
 
 	errno = 0;
 	g_status = 0;
@@ -55,7 +56,7 @@ int 	ft_execute(t_all *all)
 	path = ft_split(temp, ':');
 	free(temp);
 	res = NULL;
-	if (ft_not_absolute_path(all))
+	if ((is_relative = ft_not_absolute_path(all)))
 		while (path[i])
 		{
 			temp2 = ft_strjoin(path[i], "/");
@@ -74,7 +75,7 @@ int 	ft_execute(t_all *all)
 	fd = open(res, O_RDONLY);
 	if (fd < 0)
 	{
-		errno = 2;
+		errno = is_relative ? 0 : 2;
 		g_status = 127;
 		ft_error(all->argv, errno);
 		return (1);
@@ -87,8 +88,6 @@ int 	ft_execute(t_all *all)
 	else
 	{
 		wait(&status);
-		if (errno)
-			ft_error(all->argv, errno);
 		check_exit_status(status);
 	}
 	return (1);

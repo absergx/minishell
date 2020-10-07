@@ -6,17 +6,19 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:26:48 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/06 16:19:54 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/07 16:23:30 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_cd_write_argv(t_all *all, char *new_pwd, char *old_pwd)
+static int	ft_cd_write_argv(t_all *all, char *old_pwd)
 {
 	char	**new_argv;
 	int		i;
+	char	*new_pwd;
 
+	new_pwd = getcwd(NULL, 0);
 	new_argv = (char **)malloc(sizeof(char *) * 4);
 	if (!(new_argv[0] = ft_strdup("export"))
 	|| !(new_argv[1] = ft_strjoin("PWD=", new_pwd))
@@ -29,28 +31,33 @@ static int	ft_cd_write_argv(t_all *all, char *new_pwd, char *old_pwd)
 	free(all->argv);
 	all->argv = new_argv;
 	ft_export(all);
+	if (new_pwd)
+		free(new_pwd);
 	return (errno);
 }
 
 int			ft_cd(t_all *all)
 {
-	char	*new_pwd;
+	
 	char	*old_pwd;
+	char	*home;
 
-	new_pwd = NULL;
 	old_pwd = NULL;
 	old_pwd = getcwd(NULL, 0);
 	if (ft_strstrlen(all->argv) == 1)
-		chdir(ft_get_envp_value(all, "HOME"));
+	{
+		if ((home = ft_get_envp_value(all, "HOME")))
+			chdir(home);
+		else
+		{
+			ft_print_error("cd: HOME not set");
+			return (errno);
+		}
+	}
 	else
 		chdir(all->argv[1]);
 	if (!errno)
-	{
-		new_pwd = getcwd(NULL, 0);
-		ft_cd_write_argv(all, new_pwd, old_pwd);
-		if (new_pwd)
-			free(new_pwd);
-	}
+		ft_cd_write_argv(all, old_pwd);
 	if (old_pwd)
 		free(old_pwd);
 	return (errno);

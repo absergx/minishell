@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:43:28 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/06 15:32:59 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/07 16:17:50 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static void	ft_exit_error(char *line, int f)
 		ft_putendl_fd(": numeric argument required", 2);
 	}
 	else if (f == 1)
+	{
+		g_status = 1;
 		ft_putendl_fd("too many arguments", 2);
+	}
 }
 
 static int	ft_exit_validate_arg(char *line)
