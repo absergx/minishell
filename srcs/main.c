@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/05 17:46:42 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/07 17:20:22 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int		main(int argc, char **argv, char **envp)
 		// ft_minishell(line, &all);
 		dup2(3, 0);
 		dup2(4, 1);
+		free(line);
 	}
 	(void)argc;
 	(void)argv;

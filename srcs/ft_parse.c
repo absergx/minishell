@@ -6,12 +6,21 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/06 15:31:54 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/07 17:28:08 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int		skip_spaces(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && str[i] == ' ')
+		++i;
+	return (i);
+}
 
 void	print_argv(char **argv)
 {
@@ -387,6 +396,24 @@ int 	ft_check_symbol(t_all *all, char *line, char **word)
 	return (i);
 }
 
+int		check_valid_start(char *str)
+{
+	int i;
+
+	i = skip_spaces(str);
+	if (str[i] == '|')
+		ft_putstr_fd("minishell: syntax error near unexpected token '|'\n", 2);
+	else if (str[i] == ';')
+		ft_putstr_fd("minishell: syntax error near unexpected token ';'\n", 2);
+	if (str[i] == '|' || str[i] == ';')
+	{
+		g_status = 258;
+		while (str[i])
+			++i;
+	}
+	return (i);
+}
+
 int		ft_parse(char *line, t_all *all)
 {
 	char	*word;
@@ -394,9 +421,7 @@ int		ft_parse(char *line, t_all *all)
 
 	word = NULL;
 	all->have_redir = 0;
-	i = 0;
-	while (line[i] && line[i] == ' ')
-		++i;
+	i = check_valid_start(line);
 	while (1)
 	{
 		if (line[i] == 0)
