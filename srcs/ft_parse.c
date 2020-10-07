@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/07 17:28:08 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:10:50 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,12 +215,11 @@ int		ft_pipe(t_all *all)
 	return (1);
 }
 
-int		ft_create_file(t_all *all, char **word, int *file_name, char *redir)
+int		ft_create_file(t_all *all, char **word, char *line, char *redir)
 {
 	int fd;
 
 	fd = 0;
-	// Закрывать предыдущие открытые файлы
 	if (!ft_strcmp("right", redir))
 		fd = open(*word, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	else if (!ft_strcmp("left", redir))
@@ -228,20 +227,25 @@ int		ft_create_file(t_all *all, char **word, int *file_name, char *redir)
 	else
 		fd = open(*word, O_CREAT | O_APPEND | O_WRONLY, 0644);
 	if (fd < 0)
-		fd = -1; // Добавить ошибку
-	if (!ft_strcmp("left", redir))
+	{
+		errno = 2;
+		ft_error(all->argv, errno);
+		fd = 0;
+		while (line[fd] && (line[fd] != '|' || line[fd] != ';'))
+			++fd;
+		ft_new_argv(all);
+		return (fd);
+	}
+	else if (!ft_strcmp("left", redir))
 	{
 		all->fds[0] = fd;
-		// Добавить проверку создания файла
 		dup2(all->fds[0], 0);
 	}
 	else
 	{
 		all->fds[1] = fd;
-		// Добавить проверку создания файла
 		dup2(all->fds[1], 1);
 	}
-	*file_name = 0;
 	free(*word);
 	*word = 0;
 	return (1);
@@ -324,15 +328,30 @@ int 	ft_find_pipe_or_exec(t_all *all, char **word, char *line)
 	return (i);
 }
 
+int		error_redir(char *line, char c, t_all *all)
+{
+	int i;
+
+	i = 0;
+	g_status = 258;
+	if (c == '>')
+		ft_putstr_fd("minishell: syntax error near unexpected token '>'\n", 2);
+	else
+		ft_putstr_fd("minishell: syntax error near unexpected token '<'\n", 2);
+	while (line[i])
+		++i;
+	ft_new_argv(all);
+	return (i);
+}
+
 int 	ft_redir(t_all *all, char *line, char *redir)
 {
 	int i;
 	char *word;
-	int file_name = 1;
 
 	word = NULL;
 	i = 1;
-	if (line[i] == '>')
+	if (line[i] == '>' && line[0] != '<')
 	{
 		i = 2;
 		redir = "double_redir";
@@ -340,12 +359,12 @@ int 	ft_redir(t_all *all, char *line, char *redir)
 	while (line[i] && line[i] == ' ')
 		++i;
 	if (line[i] == '>' || line[i] == '<')
-		return (i); // Добавить ошибку
+		i += error_redir(line, line[0], all);
 	while (1)
 	{
 		if (ft_strchr("| ;><", line[i]) || line[i] == 0)
 		{
-			ft_create_file(all, &word, &file_name, redir);
+			ft_create_file(all, &word, line, redir);
 			if (line[i] == ' ')
 				++i;
 			break;

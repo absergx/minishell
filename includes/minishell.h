@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/07 17:23:28 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:06:52 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_get_env(char *line, int *i, t_all *all);
 char	*ft_env_res(char *line, int *i, t_all *all, char **word);
 int 	ft_double_quote(char *line, char **word, t_all *all);
 int		ft_pipe(t_all *all);
-int		ft_create_file(t_all *all, char **word, int *file_name, char *redir);
+int		ft_create_file(t_all *all, char **word, char *line, char *redir);
 int 	ft_add_word_in_argv(t_all *all, char **word);
 int 	ft_new_argv(t_all *all);
 int 	ft_execute_or_pipe(t_all *all, int (*func)(t_all *all), char **word, char *line);
