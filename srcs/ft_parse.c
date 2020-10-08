@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/08 15:32:19 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/08 15:58:43 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 		word = ft_calloc(3, 1);
 		word[0] = '$';
 		word[1] = c;
-		*i += 2;
+		*i = word[1] ? *i + 2 : *i + 1;
 		return (word);
 	}
 	res = ft_get_envp_value(all, word);
@@ -363,7 +363,12 @@ int 	ft_redir(t_all *all, char *line, char *redir)
 	while (line[i] && line[i] == ' ')
 		++i;
 	if (ft_strchr("<>|;", line[i]) || !line[i])
-		i += error_redir(line, line[i], all);
+	{
+		if (!line[i])
+			i += error_redir(line, line[0], all);
+		else
+			i += error_redir(line, line[i], all);
+	}
 	else
 		while (1)
 		{
