@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:43:28 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/07 16:17:50 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/08 16:50:37 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_exit_error(char *line, int f)
 {
-	ft_putstr_fd("minishell: exit: ", 2);
+	ft_putstr_fd(RED"minishell: exit: ", 2);
 	if (!f && line)
 	{
 		ft_putstr_fd(line, 2);
@@ -25,6 +25,7 @@ static void	ft_exit_error(char *line, int f)
 		g_status = 1;
 		ft_putendl_fd("too many arguments", 2);
 	}
+	ft_putstr_fd(ENDCOLOR, 2);
 }
 
 static int	ft_exit_validate_arg(char *line)
