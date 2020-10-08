@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/08 16:04:02 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/08 18:30:05 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,13 +335,13 @@ int		error_redir(char *line, char c, t_all *all)
 	i = 0;
 	g_status = 258;
 	if (c == '>')
-		ft_putstr_fd("minishell: syntax error near unexpected token '>'\n", 2);
+		ft_putstr_fd(RED"minishell: syntax error near unexpected token '>'\n"ENDCOLOR, 2);
 	else if (c == '<')
-		ft_putstr_fd("minishell: syntax error near unexpected token '<'\n", 2);
+		ft_putstr_fd(RED"minishell: syntax error near unexpected token '<'\n"ENDCOLOR, 2);
 	else if (c == '|')
-		ft_putstr_fd("minishell: syntax error near unexpected token '|'\n", 2);
+		ft_putstr_fd(RED"minishell: syntax error near unexpected token '|'\n"ENDCOLOR, 2);
 	else
-		ft_putstr_fd("minishell: syntax error near unexpected token ';'\n", 2);
+		ft_putstr_fd(RED"minishell: syntax error near unexpected token ';'\n"ENDCOLOR, 2);
 	while (line[i])
 		++i;
 	ft_new_argv(all);
@@ -432,9 +432,9 @@ int		check_valid_start(char *str)
 
 	i = skip_spaces(str);
 	if (str[i] == '|')
-		ft_putstr_fd("minishell: syntax error near unexpected token '|'\n", 2);
+		ft_putstr_fd(RED"minishell: syntax error near unexpected token '|'\n"ENDCOLOR, 2);
 	else if (str[i] == ';')
-		ft_putstr_fd("minishell: syntax error near unexpected token ';'\n", 2);
+		ft_putstr_fd(RED"minishell: syntax error near unexpected token ';'\n"ENDCOLOR, 2);
 	if (str[i] == '|' || str[i] == ';')
 	{
 		g_status = 258;
