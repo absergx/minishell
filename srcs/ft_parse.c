@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/08 15:58:43 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/08 16:04:02 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -462,17 +462,11 @@ int		ft_parse(char *line, t_all *all)
 			break;
 		}
 		if (line[i] == '\'' || line[i] == '"')
-		{
 			i += ft_quotes(all, line + i, &word);
-		}
 		else if (ft_strchr(" \\<>;|", line[i]))
-		{
 			i += ft_check_symbol(all, line + i, &word);
-		}
 		else if (line[i] == '$')
-		{
 			ft_env_res(line, &i, all, &word);
-		}
 		else
 		{
 			word = ft_add_symbol(word, line[i]);

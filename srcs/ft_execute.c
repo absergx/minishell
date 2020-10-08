@@ -2,9 +2,7 @@
 
 int		ft_execute_our(t_all *all)
 {
-	if (!ft_strcmp(all->argv[0], "exit"))
-		return (ft_exit(all));
-	else if (!ft_strcmp(all->argv[0], "cd"))
+	if (!ft_strcmp(all->argv[0], "cd"))
 		return (ft_cd(all));
 	else if (!ft_strcmp(all->argv[0], "echo"))
 		return (ft_echo(all));
@@ -40,6 +38,8 @@ int 	ft_execute(t_all *all)
 
 	if (all->argv[0] == 0)
 		return (1);
+	if (!ft_strcmp(all->argv[0], "exit"))
+		return (ft_exit(all));
 	errno = 0;
 	g_status = 0;
 	if ((i = ft_execute_our(all)) != -1)
