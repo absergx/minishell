@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/08 18:39:03 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/08 18:36:00 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -405,7 +405,8 @@ int 	ft_check_symbol(t_all *all, char *line, char **word)
 	i = 0;
 	if (line[i] == ' ')
 	{
-		ft_add_word_in_argv(all, word);
+		if ((*word)[0])
+			ft_add_word_in_argv(all, word);
 		while (line[i] && line[i] == ' ')
 			++i;
 	}
