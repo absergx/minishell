@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/08 15:21:10 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/08 15:32:19 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -336,8 +336,12 @@ int		error_redir(char *line, char c, t_all *all)
 	g_status = 258;
 	if (c == '>')
 		ft_putstr_fd("minishell: syntax error near unexpected token '>'\n", 2);
-	else
+	else if (c == '<')
 		ft_putstr_fd("minishell: syntax error near unexpected token '<'\n", 2);
+	else if (c == '|')
+		ft_putstr_fd("minishell: syntax error near unexpected token '|'\n", 2);
+	else
+		ft_putstr_fd("minishell: syntax error near unexpected token ';'\n", 2);
 	while (line[i])
 		++i;
 	ft_new_argv(all);
@@ -358,8 +362,8 @@ int 	ft_redir(t_all *all, char *line, char *redir)
 	}
 	while (line[i] && line[i] == ' ')
 		++i;
-	if (line[i] == '>' || line[i] == '<' || !line[i])
-		i += error_redir(line, line[0], all);
+	if (ft_strchr("<>|;", line[i]) || !line[i])
+		i += error_redir(line, line[i], all);
 	else
 		while (1)
 		{
