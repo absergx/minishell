@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:26:48 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/08 18:42:55 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/09 01:38:04 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,32 @@ static int	ft_cd_write_argv(t_all *all, char *old_pwd)
 	return (errno);
 }
 
+static void	ft_cd_home(t_all *all)
+{
+	char	*home;
+
+	if ((home = ft_get_envp_value(all, "HOME")))
+	{
+		chdir(home);
+		free(home);
+	}
+	else
+		ft_print_error("cd: HOME not set");
+}
+
 int			ft_cd(t_all *all)
 {
-	
 	char	*old_pwd;
-	char	*home;
 
 	old_pwd = NULL;
 	old_pwd = getcwd(NULL, 0);
 	if (ft_strstrlen(all->argv) == 1)
-	{
-		if ((home = ft_get_envp_value(all, "HOME")))
-			chdir(home);
-		else
-		{
-			ft_print_error("cd: HOME not set");
-			return (errno);
-		}
-	}
+		ft_cd_home(all);
 	else
-		chdir(all->argv[1]);
+	{
+		if (all->argv[1][0])
+			chdir(all->argv[1]);
+	}
 	if (!errno)
 		ft_cd_write_argv(all, old_pwd);
 	if (old_pwd)
