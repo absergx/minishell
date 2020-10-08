@@ -38,10 +38,10 @@ int 	ft_execute(t_all *all)
 	int		status;
 	int		is_relative;
 
-	errno = 0;
-	g_status = 0;
 	if (all->argv[0] == 0)
 		return (1);
+	errno = 0;
+	g_status = 0;
 	if ((i = ft_execute_our(all)) != -1)
 	{
 		if (errno)
