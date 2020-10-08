@@ -59,8 +59,10 @@ int 	ft_execute(t_all *all)
 	if ((is_relative = ft_not_absolute_path(all)))
 		while (path[i])
 		{
-			temp2 = ft_strjoin(path[i], "/");
-			temp = ft_strjoin(temp2, all->argv[0]);
+			if (!(temp2 = ft_strjoin(path[i], "/")))
+				ft_malloc_error();
+			if (!(temp = ft_strjoin(temp2, all->argv[0])))
+				ft_malloc_error();
 			if ((fd = open(temp, O_RDONLY)) > 0)
 			{
 				res = temp;

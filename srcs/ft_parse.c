@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/08 18:30:05 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/08 18:39:03 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ int 	ft_realloc_argv(t_all *all)
 	char	**new_argv;
 	int		i;
 
-	new_argv = ft_calloc(all->size_argv * 2, sizeof(char *));
+	if (!(new_argv = ft_calloc(all->size_argv * 2, sizeof(char *))))
+		ft_malloc_error();
 	i = 0;
 	all->size_argv *= 2;
 	while (all->argv[i])
 	{
-		new_argv[i] = ft_strdup(all->argv[i]);
+		if (!(new_argv[i] = ft_strdup(all->argv[i])))
+			ft_malloc_error();
 		free(all->argv[i]);
 		++i;
 	}
@@ -60,13 +62,15 @@ char 	*ft_add_symbol(char *word, char c)
 	new_word = 0;
 	if (!word)
 	{
-		word = ft_calloc(1, 2);
+		if (!(word = ft_calloc(1, 2)))
+			ft_malloc_error();
 		word[0] = c;
 		return (word);
 	}
 	else
 	{
-		new_word = ft_calloc(ft_strlen(word) + 2, 1);
+		if (!(new_word = ft_calloc(ft_strlen(word) + 2, 1)))
+			ft_malloc_error();
 		while (i < ft_strlen(word))
 		{
 			new_word[i] = word[i];
@@ -111,10 +115,12 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 		++tmp;
 		++len;
 	}
-	word = ft_substr(line, 1, len);
+	if (!(word = ft_substr(line, 1, len)))
+		ft_malloc_error();
 	if (!ft_strcmp("?", word))
 	{
-		res = ft_itoa(g_status);
+		if (!(res = ft_itoa(g_status)))
+			ft_malloc_error();
 		*i += len + 1;
 		return (res);
 	}
@@ -122,7 +128,8 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 	{
 		c = word[0];
 		free(word);
-		word = ft_calloc(3, 1);
+		if (!(word = ft_calloc(3, 1)))
+			ft_malloc_error();
 		word[0] = '$';
 		word[1] = c;
 		*i = word[1] ? *i + 2 : *i + 1;
@@ -253,7 +260,8 @@ int		ft_create_file(t_all *all, char **word, char *line, char *redir)
 
 int 	ft_add_word_in_argv(t_all *all, char **word)
 {
-	all->argv[all->parse.word_count] = ft_strdup(*word);
+	if (!(all->argv[all->parse.word_count] = ft_strdup(*word)))
+		ft_malloc_error();
 	free(*word);
 	*word = 0;// KEK PEK
 	all->parse.word_count += 1;
@@ -273,7 +281,8 @@ int 	ft_new_argv(t_all *all)
 		++i;
 	}
 	free(all->argv);
-	all->argv = ft_calloc(2, sizeof(char *));
+	if (!(all->argv = ft_calloc(2, sizeof(char *))))
+		ft_malloc_error();
 	all->size_argv = 2;
 	all->parse.word_count = 0;
 	return (1);

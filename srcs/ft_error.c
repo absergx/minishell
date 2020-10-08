@@ -6,13 +6,21 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 16:20:13 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/08 16:57:59 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/08 18:32:40 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void check_exit_status(int status)
+void	ft_malloc_error(void)
+{
+	ft_putstr_fd(RED"minishell: ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putendl_fd(ENDCOLOR, 2);
+	exit (1);
+}
+
+void	check_exit_status(int status)
 {
 	if (WIFEXITED(status))
 		g_status = WEXITSTATUS(status);

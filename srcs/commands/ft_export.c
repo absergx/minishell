@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:50:11 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/06 16:14:28 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/08 18:44:25 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,12 @@ static int	ft_export_add_new(t_all *all, char *new_line)
 
 	size = ft_strstrlen(all->envp);
 	if (!(new_envp = (char **)malloc(sizeof(char *) * (size + 2))))
-		return (0);
+		ft_malloc_error();
 	i = -1;
 	while (all->envp[++i])
 		new_envp[i] = all->envp[i];
-	new_envp[i] = ft_strdup(new_line);
+	if (!(new_envp[i] = ft_strdup(new_line)))
+		ft_malloc_error();
 	new_envp[i + 1] = NULL;
 	free(all->envp);
 	all->envp = new_envp;
@@ -104,7 +105,8 @@ int			ft_export(t_all *all)
 				&& (ft_strchr(all->argv[i], '=')))
 			{
 				free(all->envp[j]);
-				all->envp[j] = ft_strdup(all->argv[i]);
+				if (!(all->envp[j] = ft_strdup(all->argv[i])))
+					ft_malloc_error();
 			}
 			else if (j == -1)
 				ft_export_add_new(all, all->argv[i]);

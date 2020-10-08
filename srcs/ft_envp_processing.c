@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:13:16 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/30 19:07:59 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/08 18:42:22 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*ft_get_envp_value(t_all *all, char *name)
 {
 	size_t	i;
 	size_t	len;
+	char	*res;
 
 	i = 0;
 	len = ft_strlen(name);
@@ -28,7 +29,9 @@ char	*ft_get_envp_value(t_all *all, char *name)
 	}
 	if (all->envp[i] == NULL)
 		return (NULL);
-	return (ft_strdup(&(all->envp[i][ft_strlen(name) + 1])));
+	if (!(res = ft_strdup(&(all->envp[i][ft_strlen(name) + 1]))))
+		ft_malloc_error();
+	return (res);
 }
 
 char	*ft_get_key_from_envp(char *line)
@@ -42,7 +45,7 @@ char	*ft_get_key_from_envp(char *line)
 	while (line[i] != '=')
 		++i;
 	if (!(key = (char *)malloc(sizeof(char) * i + 1)))
-		return (NULL);
+		ft_malloc_error();
 	i = 0;
 	while (line[i] != '=')
 	{

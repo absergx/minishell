@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 18:03:35 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 18:18:45 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/08 18:44:43 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int			ft_unset(t_all *all)
 		if ((j = ft_get_envp_key(all, all->argv[i])) != -1)
 		{
 			free(all->envp[j]);
-			all->envp[j] = ft_strdup("");
+			if (!(all->envp[j] = ft_strdup("")))
+				ft_malloc_error();
 		}
 		++i;
 	}

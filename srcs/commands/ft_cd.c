@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:26:48 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/07 16:23:30 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/08 18:42:55 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ static int	ft_cd_write_argv(t_all *all, char *old_pwd)
 	char	*new_pwd;
 
 	new_pwd = getcwd(NULL, 0);
-	new_argv = (char **)malloc(sizeof(char *) * 4);
+	if (!(new_argv = (char **)malloc(sizeof(char *) * 4)))
+		ft_malloc_error();
 	if (!(new_argv[0] = ft_strdup("export"))
 	|| !(new_argv[1] = ft_strjoin("PWD=", new_pwd))
 	|| !(new_argv[2] = ft_strjoin("OLDPWD=", old_pwd)))
-		return (errno);
+		ft_malloc_error();
 	new_argv[3] = NULL;
 	i = -1;
 	while (all->argv[++i])

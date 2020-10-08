@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/08 18:30:14 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/08 18:35:21 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char	*get_line(int fd)
 			// ft_putstr_fd(" \b\b", fd);
 			continue ;
 		}
-		line = ft_strjoin((line ? line : ""), (*buf == '\n' ? "" : buf));
+		if (!(line = ft_strjoin((line ? line : ""), (*buf == '\n' ? "" : buf))))
+			ft_malloc_error();
 		if (tmp)
 			free(tmp);
 		if (*buf == '\n')
@@ -45,11 +46,11 @@ int		ft_clone_envp(char **envp, t_all *all)
 
 	if (!(all->envp = (char **)malloc(sizeof(char *)
 		* (ft_strstrlen(envp) + 1))))
-		return (0);
+		ft_malloc_error();
 	i = -1;
 	while (envp[++i])
 		if (!(all->envp[i] = ft_strdup(envp[i])))
-			return (0);
+			ft_malloc_error();
 	all->envp[i] = NULL;
 	return (1);
 }
@@ -91,7 +92,7 @@ int		main(int argc, char **argv, char **envp)
 		all.fds[0] = 0;
 		all.fds[1] = 1;
 		if (!(all.argv = ft_calloc(2, sizeof(char *))))
-			return (0);
+			ft_malloc_error();
 		all.size_argv = 2;
 		all.parse.word_e = 0;
 		all.parse.word_count = 0;
