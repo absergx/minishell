@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/07 18:10:50 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/08 15:15:10 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,21 +360,22 @@ int 	ft_redir(t_all *all, char *line, char *redir)
 		++i;
 	if (line[i] == '>' || line[i] == '<')
 		i += error_redir(line, line[0], all);
-	while (1)
-	{
-		if (ft_strchr("| ;><", line[i]) || line[i] == 0)
+	else
+		while (1)
 		{
-			ft_create_file(all, &word, line, redir);
-			if (line[i] == ' ')
+			if (ft_strchr("| ;><", line[i]) || line[i] == 0)
+			{
+				ft_create_file(all, &word, line, redir);
+				if (line[i] == ' ')
+					++i;
+				break;
+			}
+			else
+			{
+				word = ft_add_symbol(word, line[i]);
 				++i;
-			break;
+			}
 		}
-		else
-		{
-			word = ft_add_symbol(word, line[i]);
-			++i;
-		}
-	}
 	return (i);
 }
 
