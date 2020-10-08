@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/08 18:36:00 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/08 23:27:44 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ char	*ft_env_res(char *line, int *i, t_all *all, char **word)
 	//($"'\=)/
 	temp = ft_get_env(line + *i, i, all);
 	if (!temp)
-		*word = ft_add_symbol(*word, 0);
+		*word = NULL;
 	else
 	{
 		while (temp[j])
@@ -183,7 +183,10 @@ int 	ft_double_quote(char *line, char **word, t_all *all)
 		{
 			ft_env_res(line, &i, all, word);
 			if (line[i] == '"')
-				break;
+			{
+				*word = ft_add_symbol(*word, 0);
+				break ;
+			}
 		}
 		*word = ft_add_symbol(*word, line[i]);
 		++i;
@@ -405,7 +408,7 @@ int 	ft_check_symbol(t_all *all, char *line, char **word)
 	i = 0;
 	if (line[i] == ' ')
 	{
-		if ((*word)[0])
+		if ((*word))
 			ft_add_word_in_argv(all, word);
 		while (line[i] && line[i] == ' ')
 			++i;
