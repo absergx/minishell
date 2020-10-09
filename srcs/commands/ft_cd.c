@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:26:48 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/09 01:38:04 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/09 15:05:08 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	ft_cd_write_argv(t_all *all, char *old_pwd)
 	free(all->argv);
 	all->argv = new_argv;
 	ft_export(all);
+	ft_strstrfree(new_argv);
 	if (new_pwd)
 		free(new_pwd);
 	return (errno);
