@@ -84,5 +84,7 @@ int		ft_print_error(char *str);
 int		skip_spaces(char *str);
 void	ft_malloc_error(void);
 int 	strstrfree(char **str);
+void 	ft_end_parse(t_all *all, char **word);
+int 	ft_get_fd(char *redir, char **word);
 
 #endif

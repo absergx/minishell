@@ -163,7 +163,6 @@ char	*ft_env_res(char *line, int *i, t_all *all, char **word)
 	int j;
 
 	j = 0;
-	//($"'\=)/
 	temp = ft_get_env(line + *i, i, all);
 	if (!temp)
 		*word = NULL;
@@ -190,7 +189,6 @@ int 	ft_double_quote(char *line, char **word, t_all *all)
 		*word = ft_add_symbol(*word, 0);
 		return (2);
 	}
-	// ($"\)/
 	while (line[i] != '"' && line[i])
 	{
 		if (line[i] == '\\' && ft_strchr("$\"\\", line[i + 1]))
@@ -241,7 +239,7 @@ int		ft_pipe(t_all *all)
 	return (1);
 }
 
-int		ft_create_file(t_all *all, char **word, char *line, char *redir)
+int 	ft_get_fd(char *redir, char **word)
 {
 	int fd;
 
@@ -252,18 +250,32 @@ int		ft_create_file(t_all *all, char **word, char *line, char *redir)
 		fd = open(*word, O_RDONLY);
 	else
 		fd = open(*word, O_CREAT | O_APPEND | O_WRONLY, 0644);
+	return (fd);
+}
+
+int 	ft_err_fd(t_all *all, char **word, char *line)
+{
+	int fd;
+
+	errno = 2;
+	ft_error(all->argv, errno);
+	fd = 0;
+	while (line[fd] && (line[fd] != '|' || line[fd] != ';'))
+		++fd;
+	ft_new_argv(all);
+	free(*word);
+	*word = 0;
+	return (fd);
+}
+
+
+int		ft_create_file(t_all *all, char **word, char *line, char *redir)
+{
+	int fd;
+
+	fd = ft_get_fd(redir, word);
 	if (fd < 0)
-	{
-		errno = 2;
-		ft_error(all->argv, errno);
-		fd = 0;
-		while (line[fd] && (line[fd] != '|' || line[fd] != ';'))
-			++fd;
-		ft_new_argv(all);
-		free(*word);
-		*word = 0;
-		return (fd);
-	}
+		return (ft_err_fd(all, word, line));
 	else if (!ft_strcmp("left", redir))
 	{
 		all->fds[0] = fd;
@@ -373,6 +385,8 @@ int		error_redir(char *line, char c, t_all *all)
 	return (i);
 }
 
+//int 	ft_parse_redir_name()
+
 int 	ft_redir(t_all *all, char *line, char *redir)
 {
 	int i;
@@ -415,6 +429,18 @@ int 	ft_redir(t_all *all, char *line, char *redir)
 	return (i);
 }
 
+int 	ft_redir_left_or_right(t_all *all, char *line, char **word, char *redir)
+{
+	int i;
+
+	i = 0;
+	all->have_redir = 1;
+	if (*word)
+		ft_add_word_in_argv(all, word);
+	i += ft_redir(all, line, redir);
+	return (i);
+}
+
 int 	ft_check_symbol(t_all *all, char *line, char **word)
 {
 	int i;
@@ -433,23 +459,11 @@ int 	ft_check_symbol(t_all *all, char *line, char **word)
 		i += 2;
 	}
 	else if (line[i] == ';' || line[i] == '|')
-	{
 		i += ft_find_pipe_or_exec(all, word, line + i);
-	}
 	else if (line[i] == '>')
-	{
-		all->have_redir = 1;
-		if (*word)
-			ft_add_word_in_argv(all, word);
-		i += ft_redir(all, line + i, "right");
-	}
+		i += ft_redir_left_or_right(all, line + i, word, "right");
 	else if (line[i] == '<')
-	{
-		all->have_redir = 1;
-		if (*word)
-			ft_add_word_in_argv(all, word);
-		i += ft_redir(all, line + i, "left");
-	}
+		i += ft_redir_left_or_right(all, line + i, word, "left");
 	return (i);
 }
 
@@ -471,22 +485,26 @@ int		check_valid_start(char *str)
 	return (i);
 }
 
+void 	ft_end_parse(t_all *all, char **word)
+{
+	if (*word)
+		ft_add_word_in_argv(all, word);
+	ft_execute(all);
+	strstrfree(all->argv);
+}
+
 int		ft_parse(char *line, t_all *all)
 {
 	char	*word;
 	int		i;
 
 	word = NULL;
-	all->have_redir = 0;
 	i = check_valid_start(line);
 	while (1)
 	{
 		if (line[i] == 0)
 		{
-			if (word)
-				ft_add_word_in_argv(all, &word);
-			ft_execute(all);
-			strstrfree(all->argv);
+			ft_end_parse(all, &word);
 			break;
 		}
 		if (line[i] == '\'' || line[i] == '"')

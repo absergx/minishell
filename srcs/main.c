@@ -97,10 +97,13 @@ int		main(int argc, char **argv, char **envp)
 		all.parse.word_e = 0;
 		all.parse.word_count = 0;
 		all.parse.space_before = 0;
+		all.have_redir = 0;
 		ft_parse(line, &all);
 		// ft_minishell(line, &all);
 		dup2(3, 0);
 		dup2(4, 1);
+		if (line[0] == '+')
+			break;
 		free(line);
 	}
 	(void)argc;
