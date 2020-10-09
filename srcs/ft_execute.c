@@ -92,10 +92,10 @@ int 	ft_execute(t_all *all)
 	{
 		wait(&status);
 		check_exit_status(status);
-		if (temp)
-			free(temp);
-		if (temp2)
-			free(temp2);
+//		if (temp)
+//			free(temp);
+//		if (temp2)
+//			free(temp2);
 	}
 	return (1);
 }
