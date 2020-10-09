@@ -66,6 +66,7 @@ int 	ft_execute(t_all *all)
 			if ((fd = open(temp, O_RDONLY)) > 0)
 			{
 				res = temp;
+				free(temp2);
 				break ;
 			}
 			free(temp);
@@ -73,7 +74,8 @@ int 	ft_execute(t_all *all)
 			++i;
 		}
 	if (!res)
-		res = all->argv[0];
+		if (!(res = ft_strdup(all->argv[0])))
+			ft_malloc_error();
 	strstrfree(path);
 	fd = open(res, O_RDONLY);
 	if (fd < 0)
@@ -92,10 +94,8 @@ int 	ft_execute(t_all *all)
 	{
 		wait(&status);
 		check_exit_status(status);
-//		if (temp)
-//			free(temp);
-//		if (temp2)
-//			free(temp2);
+		if (res)
+			free(res);
 	}
 	return (1);
 }
