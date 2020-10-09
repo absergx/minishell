@@ -74,6 +74,7 @@ int 	ft_execute(t_all *all)
 		}
 	if (!res)
 		res = all->argv[0];
+	strstrfree(path);
 	fd = open(res, O_RDONLY);
 	if (fd < 0)
 	{
@@ -91,6 +92,10 @@ int 	ft_execute(t_all *all)
 	{
 		wait(&status);
 		check_exit_status(status);
+		if (temp)
+			free(temp);
+		if (temp2)
+			free(temp2);
 	}
 	return (1);
 }
