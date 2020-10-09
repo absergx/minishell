@@ -17,6 +17,18 @@ int		ft_execute_our(t_all *all)
 	return (-1);
 }
 
+void	ft_strstrfree(char **str)
+{
+	int		i;
+
+	i = -1;
+	if (!str)
+		return ;
+	while (str[++i])
+		free(str[i]);
+	free(str);
+}
+
 int		ft_not_absolute_path(t_all *all)
 {
 	if (all->argv[0] && ft_strchr("./", all->argv[0][0]))
@@ -66,15 +78,18 @@ int 	ft_execute(t_all *all)
 			if ((fd = open(temp, O_RDONLY)) > 0)
 			{
 				res = temp;
+				free(temp2);
 				break ;
 			}
 			free(temp);
 			free(temp2);
 			++i;
 		}
+	ft_strstrfree(path);
 	if (!res)
 		res = all->argv[0];
 	fd = open(res, O_RDONLY);
+	free(res);
 	if (fd < 0)
 	{
 		errno = is_relative ? 0 : 2;
