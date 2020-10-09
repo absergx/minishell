@@ -83,5 +83,6 @@ void	check_exit_status(int status);
 int		ft_print_error(char *str);
 int		skip_spaces(char *str);
 void	ft_malloc_error(void);
+int 	strstrfree(char **str);
 
 #endif

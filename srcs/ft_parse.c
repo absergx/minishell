@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+int 	strstrfree(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		++i;
+	}
+	free(str);
+	return (1);
+}
+
 int		skip_spaces(char *str)
 {
 	int i;
@@ -77,6 +91,7 @@ char 	*ft_add_symbol(char *word, char c)
 			++i;
 		}
 		new_word[i] = c;
+		free(word);
 		return (new_word);
 	}
 }
@@ -122,6 +137,7 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 		if (!(res = ft_itoa(g_status)))
 			ft_malloc_error();
 		*i += len + 1;
+		free(word);
 		return (res);
 	}
 	if (!ft_isalnum(word[0]))
@@ -244,6 +260,8 @@ int		ft_create_file(t_all *all, char **word, char *line, char *redir)
 		while (line[fd] && (line[fd] != '|' || line[fd] != ';'))
 			++fd;
 		ft_new_argv(all);
+		free(*word);
+		*word = 0;
 		return (fd);
 	}
 	else if (!ft_strcmp("left", redir))
@@ -278,12 +296,7 @@ int 	ft_new_argv(t_all *all)
 	int i;
 
 	i = 0;
-	while (all->argv[i])
-	{
-		free(all->argv[i]);
-		++i;
-	}
-	free(all->argv);
+	strstrfree(all->argv);
 	if (!(all->argv = ft_calloc(2, sizeof(char *))))
 		ft_malloc_error();
 	all->size_argv = 2;
@@ -398,6 +411,7 @@ int 	ft_redir(t_all *all, char *line, char *redir)
 				++i;
 			}
 		}
+	free(word);
 	return (i);
 }
 
@@ -472,6 +486,7 @@ int		ft_parse(char *line, t_all *all)
 			if (word)
 				ft_add_word_in_argv(all, &word);
 			ft_execute(all);
+			strstrfree(all->argv);
 			break;
 		}
 		if (line[i] == '\'' || line[i] == '"')
