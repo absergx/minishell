@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/09 15:04:44 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/08 18:33:31 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,5 @@ void	check_exit_status(int status);
 int		ft_print_error(char *str);
 int		skip_spaces(char *str);
 void	ft_malloc_error(void);
-void	ft_strstrfree(char **str);
 
 #endif

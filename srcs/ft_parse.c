@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/09 15:14:52 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/08 23:27:44 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char 	*ft_add_symbol(char *word, char c)
 			++i;
 		}
 		new_word[i] = c;
-		free(word);
 		return (new_word);
 	}
 }
@@ -206,9 +205,9 @@ int		ft_pipe(t_all *all)
 	{
 		if (!all->have_redir)
 			dup2(all->fds[1], 1);
+		ft_execute(all);
 		close(all->fds[0]);
 		close(all->fds[1]);
-		ft_strstrfree(all->argv);
 		exit(1);
 	}
 	else
