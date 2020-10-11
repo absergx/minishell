@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 16:20:13 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/08 18:32:40 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/09 20:49:37 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_malloc_error(void)
 	ft_putendl_fd(ENDCOLOR, 2);
 	exit (1);
 }
-
 void	check_exit_status(int status)
 {
 	if (WIFEXITED(status))
