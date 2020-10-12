@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/12 10:16:46 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/12 10:53:39 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,44 +113,49 @@ int 	ft_single_quote(char *line, char **word)
 	return (i);
 }
 
+char	*ft_get_env_status(char **word, int *i, int len)
+{
+	char *res;
+
+	if (!(res = ft_itoa(g_status)))
+		ft_malloc_error();
+	*i += len + 1;
+	free(*word);
+	return (res);	
+}
+
+char	*ft_get_env_not_valid_name(char **word, int *i)
+{
+	char c;
+	char *res;
+
+	c = (*word)[0];
+	free(*word);
+	if (!(res = ft_calloc(3, 1)))
+		ft_malloc_error();
+	res[0] = '$';
+	res[1] = c;
+	*i = res[1] ? *i + 2 : *i + 1;
+	return (res);
+}
+
 char	*ft_get_env(char *line, int *i, t_all *all)
 {
 	char *word;
 	char *res;
 	int len;
-	int tmp;
-	char c;
 
-	tmp = 1;
 	len = 0;
 	res = 0;
-	while (line[tmp] != ' ' && line[tmp] != '"' && line[tmp] \
-			&& !ft_strchr("|<>;\\=$'", line[tmp]))
-	{
-		++tmp;
+	while (line[len + 1] != ' ' && line[len + 1] != '"' && line[len + 1] \
+			&& !ft_strchr("|<>;\\=$'", line[len + 1]))
 		++len;
-	}
 	if (!(word = ft_substr(line, 1, len)))
 		ft_malloc_error();
 	if (!ft_strcmp("?", word))
-	{
-		if (!(res = ft_itoa(g_status)))
-			ft_malloc_error();
-		*i += len + 1;
-		free(word);
-		return (res);
-	}
+		return (ft_get_env_status(&word, i, len));
 	if (!ft_isalnum(word[0]) && word[0] != '_')
-	{
-		c = word[0];
-		free(word);
-		if (!(word = ft_calloc(3, 1)))
-			ft_malloc_error();
-		word[0] = '$';
-		word[1] = c;
-		*i = word[1] ? *i + 2 : *i + 1;
-		return (word);
-	}
+		return (ft_get_env_not_valid_name(&word, i));
 	res = ft_get_envp_value(all, word);
 	free(word);
 	*i += len + 1;
@@ -205,8 +210,7 @@ int 	ft_double_quote(char *line, char **word, t_all *all)
 		*word = ft_add_symbol(*word, line[i]);
 		++i;
 	}
-	++i;
-	return (i);
+	return (i + 1);
 }
 
 int		ft_pipe(t_all *all)
@@ -220,18 +224,15 @@ int		ft_pipe(t_all *all)
 		if (!all->have_redir)
 			dup2(all->fds[1], 1);
 		ft_execute(all);
-		close(all->fds[0]);
-		close(all->fds[1]);
 		exit(1);
 	}
+	else if (pid < 0)
+		ft_fork_error();
 	else
 	{
 		wait(0);
-		if (all->have_redir)
-		{
+		if (all->have_redir && ((all->have_redir = 0) == 0))
 			dup2(4, 1);
-			all->have_redir = 0;
-		}
 		dup2(all->fds[0], 0);
 		close(all->fds[1]);
 		close(all->fds[0]);
@@ -382,14 +383,35 @@ int		error_redir(char *line, char c, t_all *all)
 	return (i);
 }
 
-//int 	ft_parse_redir_name()
+int 	ft_parse_file_name(t_all *all, char *line, int *i, char *redir)
+{
+	char *word;
+
+	word = 0;
+	while (1)
+	{
+		if (ft_strchr("| ;><", line[*i]) || line[*i] == 0)
+		{
+			if (word)
+				ft_create_file(all, &word, line, redir);
+			if (line[*i] == ' ')
+				*i += 1;
+			break;
+		}
+		else
+		{
+			word = ft_add_symbol(word, line[*i]);
+			*i += 1;
+		}
+	}
+	free(word);
+	return (0);
+}
 
 int 	ft_redir(t_all *all, char *line, char *redir)
 {
 	int i;
-	char *word;
-
-	word = NULL;
+	
 	i = 1;
 	if (line[i] == '>' && line[0] != '<')
 	{
@@ -406,23 +428,7 @@ int 	ft_redir(t_all *all, char *line, char *redir)
 			i += error_redir(line, line[i], all);
 	}
 	else
-		while (1)
-		{
-			if (ft_strchr("| ;><", line[i]) || line[i] == 0)
-			{
-				if (word)
-					ft_create_file(all, &word, line, redir);
-				if (line[i] == ' ')
-					++i;
-				break;
-			}
-			else
-			{
-				word = ft_add_symbol(word, line[i]);
-				++i;
-			}
-		}
-	free(word);
+		ft_parse_file_name(all, line, &i, redir);
 	return (i);
 }
 

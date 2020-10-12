@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 16:20:13 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 11:50:46 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 10:37:03 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_fork_error(void)
+{
+	ft_putstr_fd(RED"minishell: ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putendl_fd(ENDCOLOR, 2);
+	exit (1);
+}
 
 void	ft_malloc_error(void)
 {

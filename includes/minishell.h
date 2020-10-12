@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/08 18:33:31 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 10:48:58 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,7 @@ void	ft_malloc_error(void);
 int 	strstrfree(char **str);
 void 	ft_end_parse(t_all *all, char **word);
 int 	ft_get_fd(char *redir, char **word);
-
+int 	ft_parse_file_name(t_all *all, char *line, int *i, char *redir);
+void	ft_fork_error(void);
+char	*ft_get_env_status(char **word, int *i, int len);
 #endif
