@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:26:48 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/11 20:21:25 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 11:58:42 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static int	ft_cd_home(t_all *all)
 
 	if ((home = ft_get_envp_value(all, "HOME")))
 	{
-			chdir(home);
-			free(home);
-			return (1);
+		chdir(home);
+		free(home);
+		return (1);
 	}
 	else
 		ft_print_error("cd: HOME not set");

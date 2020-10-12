@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/08 18:35:21 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 12:08:51 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,18 @@ void	ft_promt(void)
 	}
 }
 
+static void	ft_minishell(t_all *all)
+{
+	
+}
+
 int		main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	t_all	all;
 
 	g_status = 0;
-	if (!ft_clone_envp(envp, &all))
-		exit(0); // ERROR
+	ft_clone_envp(envp, &all);
 	dup2(0, 3);
 	dup2(1, 4);
 	signal(SIGINT, ft_sigint);
@@ -99,7 +103,6 @@ int		main(int argc, char **argv, char **envp)
 		all.parse.space_before = 0;
 		all.have_redir = 0;
 		ft_parse(line, &all);
-		// ft_minishell(line, &all);
 		dup2(3, 0);
 		dup2(4, 1);
 		if (line[0] == '+')

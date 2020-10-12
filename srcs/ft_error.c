@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 16:20:13 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 10:37:03 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/12 11:59:18 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_fork_error(void)
 	ft_putstr_fd(RED"minishell: ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putendl_fd(ENDCOLOR, 2);
-	exit (1);
+	exit(1);
 }
 
 void	ft_malloc_error(void)
@@ -25,7 +25,7 @@ void	ft_malloc_error(void)
 	ft_putstr_fd(RED"minishell: ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putendl_fd(ENDCOLOR, 2);
-	exit (1);
+	exit(1);
 }
 
 void	check_exit_status(int status)

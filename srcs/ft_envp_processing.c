@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:13:16 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/08 18:42:22 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 12:03:24 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,17 @@ int		ft_get_envp_key(t_all *all, char *name)
 	if (all->envp[i] == NULL)
 		return (-1);
 	return ((int)i);
+}
+
+void	ft_get_path_in_argv(t_all *all)
+{
+	all->execute.fd = 0;
+	all->execute.temp = ft_get_envp_value(all, "PATH");
+	if (!(all->execute.temp))
+		if (!(all->execute.temp = ft_strdup("")))
+			ft_malloc_error();
+	if (!(all->execute.path = ft_split(all->execute.temp, ':')))
+		ft_malloc_error();
+	free(all->execute.temp);
+	all->execute.res = NULL;
 }

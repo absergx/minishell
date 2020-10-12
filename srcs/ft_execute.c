@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_execute.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
+/*   Updated: 2020/10/12 12:03:19 by memilio          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int		ft_execute_our(t_all *all)
@@ -24,19 +36,6 @@ int		ft_not_absolute_path(t_all *all)
 	return (1);
 }
 
-void	ft_get_path_in_argv(t_all *all)
-{
-	all->execute.fd = 0;
-	all->execute.temp = ft_get_envp_value(all, "PATH");
-	if (!(all->execute.temp))
-		if (!(all->execute.temp = ft_strdup("")))
-			ft_malloc_error();
-	if (!(all->execute.path = ft_split(all->execute.temp, ':')))
-		ft_malloc_error();
-	free(all->execute.temp);
-	all->execute.res = NULL;
-}
-
 void	ft_get_path(t_all *all)
 {
 	int i;
@@ -47,7 +46,8 @@ void	ft_get_path(t_all *all)
 		{
 			if (!(all->execute.temp2 = ft_strjoin(all->execute.path[i], "/")))
 				ft_malloc_error();
-			if (!(all->execute.temp = ft_strjoin(all->execute.temp2, all->argv[0])))
+			if (!(all->execute.temp = ft_strjoin(all->execute.temp2,
+			all->argv[0])))
 				ft_malloc_error();
 			if ((all->execute.fd = open(all->execute.temp, O_RDONLY)) > 0)
 			{
@@ -67,13 +67,11 @@ void	ft_get_path(t_all *all)
 
 int		ft_execute_fork(t_all *all)
 {
-	int pid;
+	int		pid;
 
 	pid = fork();
 	if (pid == 0)
-	{
-		exit (execve(all->execute.res, all->argv, all->envp));
-	}
+		exit(execve(all->execute.res, all->argv, all->envp));
 	else if (pid < 0)
 		ft_fork_error();
 	else
@@ -86,9 +84,9 @@ int		ft_execute_fork(t_all *all)
 	return (1);
 }
 
-int 	ft_execute(t_all *all)
+int		ft_execute(t_all *all)
 {
-	int 	i;
+	int		i;
 
 	if (all->argv[0] == 0)
 		return (1);
