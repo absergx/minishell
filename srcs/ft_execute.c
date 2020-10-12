@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 12:29:15 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/12 13:08:06 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,11 @@ int		ft_execute(t_all *all)
 	ft_get_path(all);
 	if (stat(all->execute.res, &buf) < 0 || S_ISDIR(buf.st_mode))
 	{
-		g_status = 127;
-		ft_error(all->argv, errno);
+		g_status = S_ISDIR(buf.st_mode) ? 126 : 127;
+		if (g_status == 126)
+			ft_error(all->argv, -1);
+		else
+			ft_error(all->argv, errno);
 		return (1);
 	}
 	return (ft_execute_fork(all));
