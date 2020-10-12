@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 13:15:13 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/12 13:23:12 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int		ft_execute(t_all *all)
 		if (all->execute.is_relative)
 			errno = 0;
 		if (g_status == 126)
-			ft_error(all->argv, -1);
+			ft_error(all->argv, 21);
 		else
 			ft_error(all->argv, errno);
 		return (1);

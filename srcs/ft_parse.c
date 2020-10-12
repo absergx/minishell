@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/12 13:03:04 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 13:43:31 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,9 +256,11 @@ int 	ft_get_fd(char *redir, char **word)
 
 int 	ft_err_fd(t_all *all, char **word, char *line)
 {
-	int fd;
+	int 		fd;
+	struct stat buf;
 
-	errno = 2;
+	errno = stat(*word, &buf) < 0 ? 2 : 13;
+	ft_add_word_in_argv(all, word);
 	ft_error(all->argv, errno);
 	fd = 0;
 	while (line[fd] && (line[fd] != '|' || line[fd] != ';'))
@@ -289,7 +291,7 @@ int		ft_create_file(t_all *all, char **word, char *line, char *redir)
 	}
 	free(*word);
 	*word = 0;
-	return (1);
+	return (0);
 }
 
 int 	ft_add_word_in_argv(t_all *all, char **word)
@@ -393,7 +395,7 @@ int 	ft_parse_file_name(t_all *all, char *line, int *i, char *redir)
 		if (ft_strchr("| ;><", line[*i]) || line[*i] == 0)
 		{
 			if (word)
-				ft_create_file(all, &word, line, redir);
+				*i += ft_create_file(all, &word, line, redir);
 			if (line[*i] == ' ')
 				*i += 1;
 			break;
