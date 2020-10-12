@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/08 23:27:44 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/12 10:16:46 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 		free(word);
 		return (res);
 	}
-	if (!ft_isalnum(word[0]))
+	if (!ft_isalnum(word[0]) && word[0] != '_')
 	{
 		c = word[0];
 		free(word);
@@ -305,9 +305,6 @@ int 	ft_add_word_in_argv(t_all *all, char **word)
 
 int 	ft_new_argv(t_all *all)
 {
-	int i;
-
-	i = 0;
 	strstrfree(all->argv);
 	if (!(all->argv = ft_calloc(2, sizeof(char *))))
 		ft_malloc_error();
