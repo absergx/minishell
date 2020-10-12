@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 16:20:13 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 11:59:18 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 13:08:08 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ int		ft_error(char **argv, int errcode)
 		ft_putstr_fd(argv[1], 2);
 		ft_putstr_fd(": ", 2);
 	}
-	if (errcode)
+	if (errcode > 0)
 		ft_putendl_fd(strerror(errcode), 2);
+	else if (errcode == - 1)
+		ft_putendl_fd("is a directory", 2);
 	else
 		ft_putendl_fd("command not found", 2);
 	ft_putstr_fd(ENDCOLOR, 2);
