@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:50:11 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/08 18:44:25 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 12:10:32 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ static int	ft_export_check_name(char *name)
 	f = 0;
 	while (name[i] && name[i] != '=')
 	{
-		if (ft_isalpha(name[i]))
+		if (ft_isalpha(name[i]) || name[i] == '_')
+		{
 			f = 1;
-		else if (ft_isdigit(name[i]) && !f)
-			return (0);
+			++i;
+		}
+		else if (ft_isdigit(name[i]) && f)
+			++i;
 		else
 			return (0);
-		++i;
 	}
 	return ((i == 0) ? 0 : 1);
 }
