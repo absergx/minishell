@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 17:07:27 by casubmar          #+#    #+#             */
-/*   Updated: 2020/10/12 17:07:45 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 18:15:38 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_add_symbol(char *word, char c)
+char		*ft_add_symbol(char *word, char c)
 {
 	char	*new_word;
 	size_t	i;
@@ -41,7 +41,7 @@ char	*ft_add_symbol(char *word, char c)
 	}
 }
 
-int		ft_check_symbol(t_all *all, char *line, char **word)
+static int	ft_check_symbol(t_all *all, char *line, char **word)
 {
 	int		i;
 
@@ -67,7 +67,7 @@ int		ft_check_symbol(t_all *all, char *line, char **word)
 	return (i);
 }
 
-int		check_valid_start(char *str)
+static int	check_valid_start(char *str)
 {
 	int i;
 
@@ -87,7 +87,7 @@ unexpected token ';'\n"ENDCOLOR, 2);
 	return (i);
 }
 
-void	ft_end_parse(t_all *all, char **word)
+static void	ft_end_parse(t_all *all, char **word)
 {
 	if (*word)
 		ft_add_word_in_argv(all, word);
@@ -95,7 +95,7 @@ void	ft_end_parse(t_all *all, char **word)
 	strstrfree(all->argv);
 }
 
-int		ft_parse(char *line, t_all *all)
+int			ft_parse(char *line, t_all *all)
 {
 	char	*word;
 	int		i;

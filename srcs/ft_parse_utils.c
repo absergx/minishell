@@ -6,37 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:26:53 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 18:05:16 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 19:41:12 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		strstrfree(char **str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		++i;
-	}
-	free(str);
-	return (1);
-}
-
-int		skip_spaces(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] && str[i] == ' ')
-		++i;
-	return (i);
-}
-
-int		ft_realloc_argv(t_all *all)
+static int	ft_realloc_argv(t_all *all)
 {
 	char	**new_argv;
 	int		i;
@@ -57,7 +33,31 @@ int		ft_realloc_argv(t_all *all)
 	return (1);
 }
 
-int		ft_add_word_in_argv(t_all *all, char **word)
+int			strstrfree(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		++i;
+	}
+	free(str);
+	return (1);
+}
+
+int			skip_spaces(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && str[i] == ' ')
+		++i;
+	return (i);
+}
+
+int			ft_add_word_in_argv(t_all *all, char **word)
 {
 	if (!(all->argv[all->word_count] = ft_strdup(*word)))
 		ft_malloc_error();
@@ -69,7 +69,7 @@ int		ft_add_word_in_argv(t_all *all, char **word)
 	return (1);
 }
 
-int		ft_new_argv(t_all *all)
+int			ft_new_argv(t_all *all)
 {
 	strstrfree(all->argv);
 	if (!(all->argv = ft_calloc(2, sizeof(char *))))

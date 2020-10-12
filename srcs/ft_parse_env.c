@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 17:02:25 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 17:04:27 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 18:35:25 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_get_env_status(char **word, int *i, int len)
+static char	*ft_get_env_status(char **word, int *i, int len)
 {
 	char	*res;
 
@@ -23,7 +23,7 @@ char	*ft_get_env_status(char **word, int *i, int len)
 	return (res);
 }
 
-char	*ft_get_env_not_valid_name(char **word, int *i)
+static char	*ft_get_env_not_valid_name(char **word, int *i)
 {
 	char	c;
 	char	*res;
@@ -38,7 +38,7 @@ char	*ft_get_env_not_valid_name(char **word, int *i)
 	return (res);
 }
 
-char	*ft_get_env(char *line, int *i, t_all *all)
+static char	*ft_get_env(char *line, int *i, t_all *all)
 {
 	char	*word;
 	char	*res;
@@ -61,7 +61,7 @@ char	*ft_get_env(char *line, int *i, t_all *all)
 	return (res);
 }
 
-char	*ft_env_res(char *line, int *i, t_all *all, char **word)
+char		*ft_env_res(char *line, int *i, t_all *all, char **word)
 {
 	char	*temp;
 	int		j;

@@ -6,27 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:33:41 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 16:38:30 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 19:39:00 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_get_fd(char *redir, char **word)
-{
-	int fd;
-
-	fd = 0;
-	if (!ft_strcmp("right", redir))
-		fd = open(*word, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	else if (!ft_strcmp("left", redir))
-		fd = open(*word, O_RDONLY);
-	else
-		fd = open(*word, O_CREAT | O_APPEND | O_WRONLY, 0644);
-	return (fd);
-}
-
-int		ft_err_fd(t_all *all, char **word, char *line)
+static int	ft_err_fd(t_all *all, char **word, char *line)
 {
 	int			fd;
 	struct stat	buf;
@@ -43,7 +29,7 @@ int		ft_err_fd(t_all *all, char **word, char *line)
 	return (fd);
 }
 
-int		ft_create_file(t_all *all, char **word, char *line, char *redir)
+int			ft_create_file(t_all *all, char **word, char *line, char *redir)
 {
 	int fd;
 
@@ -65,27 +51,16 @@ int		ft_create_file(t_all *all, char **word, char *line, char *redir)
 	return (0);
 }
 
-int		ft_parse_file_name(t_all *all, char *line, int *i, char *redir)
+int			ft_get_fd(char *redir, char **word)
 {
-	char *word;
+	int fd;
 
-	word = 0;
-	while (1)
-	{
-		if (ft_strchr("| ;><", line[*i]) || line[*i] == 0)
-		{
-			if (word)
-				*i += ft_create_file(all, &word, line, redir);
-			if (line[*i] == ' ')
-				*i += 1;
-			break ;
-		}
-		else
-		{
-			word = ft_add_symbol(word, line[*i]);
-			*i += 1;
-		}
-	}
-	free(word);
-	return (0);
+	fd = 0;
+	if (!ft_strcmp("right", redir))
+		fd = open(*word, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	else if (!ft_strcmp("left", redir))
+		fd = open(*word, O_RDONLY);
+	else
+		fd = open(*word, O_CREAT | O_APPEND | O_WRONLY, 0644);
+	return (fd);
 }

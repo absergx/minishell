@@ -6,13 +6,38 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:55:26 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 16:58:13 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 19:40:02 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		error_redir(char *line, char c, t_all *all)
+static int	ft_parse_file_name(t_all *all, char *line, int *i, char *redir)
+{
+	char *word;
+
+	word = 0;
+	while (1)
+	{
+		if (ft_strchr("| ;><", line[*i]) || line[*i] == 0)
+		{
+			if (word)
+				*i += ft_create_file(all, &word, line, redir);
+			if (line[*i] == ' ')
+				*i += 1;
+			break ;
+		}
+		else
+		{
+			word = ft_add_symbol(word, line[*i]);
+			*i += 1;
+		}
+	}
+	free(word);
+	return (0);
+}
+
+static int	error_redir(char *line, char c, t_all *all)
 {
 	int i;
 
@@ -34,7 +59,7 @@ int		error_redir(char *line, char c, t_all *all)
 	return (i);
 }
 
-int		ft_redir(t_all *all, char *line, char *redir)
+static int	ft_redir(t_all *all, char *line, char *redir)
 {
 	int i;
 
@@ -58,7 +83,8 @@ int		ft_redir(t_all *all, char *line, char *redir)
 	return (i);
 }
 
-int		ft_redir_left_or_right(t_all *all, char *line, char **word, char *redir)
+int			ft_redir_left_or_right(t_all *all, char *line, char **word,
+			char *redir)
 {
 	int i;
 

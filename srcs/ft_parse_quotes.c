@@ -6,29 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:59:26 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 17:01:09 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 18:36:23 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_quotes(t_all *all, char *line, char **word)
-{
-	int i;
-
-	i = 0;
-	if (line[i] == '\'')
-	{
-		i += ft_single_quote(line + i, word);
-	}
-	else
-	{
-		i += ft_double_quote(line + i, word, all);
-	}
-	return (i);
-}
-
-int		ft_double_quote(char *line, char **word, t_all *all)
+static int	ft_double_quote(char *line, char **word, t_all *all)
 {
 	int i;
 
@@ -57,7 +41,7 @@ int		ft_double_quote(char *line, char **word, t_all *all)
 	return (i + 1);
 }
 
-int		ft_single_quote(char *line, char **word)
+static int	ft_single_quote(char *line, char **word)
 {
 	int i;
 
@@ -73,5 +57,21 @@ int		ft_single_quote(char *line, char **word)
 		++i;
 	}
 	++i;
+	return (i);
+}
+
+int			ft_quotes(t_all *all, char *line, char **word)
+{
+	int i;
+
+	i = 0;
+	if (line[i] == '\'')
+	{
+		i += ft_single_quote(line + i, word);
+	}
+	else
+	{
+		i += ft_double_quote(line + i, word, all);
+	}
 	return (i);
 }

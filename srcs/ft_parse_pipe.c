@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 17:05:05 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 17:06:11 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 18:33:27 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_pipe(t_all *all)
+static int	ft_pipe(t_all *all)
 {
 	int pid;
 
@@ -39,7 +39,7 @@ int		ft_pipe(t_all *all)
 	return (1);
 }
 
-int		ft_execute_or_pipe(t_all *all, int (*func)(t_all *all), char **word,
+static int	ft_execute_or_pipe(t_all *all, int (*func)(t_all *all), char **word,
 		char *line)
 {
 	int i;
@@ -55,7 +55,7 @@ int		ft_execute_or_pipe(t_all *all, int (*func)(t_all *all), char **word,
 	return (i);
 }
 
-int		ft_find_pipe_or_exec(t_all *all, char **word, char *line)
+int			ft_find_pipe_or_exec(t_all *all, char **word, char *line)
 {
 	int i;
 
