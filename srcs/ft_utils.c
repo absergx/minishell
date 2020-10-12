@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_envp_processing.c                               :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:13:16 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 12:03:24 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 16:25:18 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,11 @@ void	ft_get_path_in_argv(t_all *all)
 		ft_malloc_error();
 	free(all->execute.temp);
 	all->execute.res = NULL;
+}
+
+int		ft_not_absolute_path(t_all *all)
+{
+	if (all->argv[0] && ft_strchr("./", all->argv[0][0]))
+		return (0);
+	return (1);
 }

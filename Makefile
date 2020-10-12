@@ -6,14 +6,19 @@
 #    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/17 17:45:53 by memilio           #+#    #+#              #
-#    Updated: 2020/10/06 16:27:53 by memilio          ###   ########.fr        #
+#    Updated: 2020/10/12 17:02:42 by memilio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 FUNC	=	main.c \
 			ft_parse.c \
-			ft_envp_processing.c \
+			ft_parse_utils.c \
+			ft_parse_fd.c \
+			ft_parse_redir.c \
+			ft_parse_quotes.c \
+			ft_parse_env.c \
+			ft_utils.c \
 			ft_execute.c \
 			commands/ft_cd.c \
 			commands/ft_echo.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 13:05:15 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/12 17:06:16 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,40 @@ char	*ft_get_env_status(char **word, int *i, int len);
 void	ft_get_path_in_argv(t_all *all);
 void	ft_get_path(t_all *all);
 int		ft_execute_fork(t_all *all);
+int		ft_not_absolute_path(t_all *all);
+
+//ft_parse_utils.c
+int		skip_spaces(char *str);
+int 	ft_realloc_argv(t_all *all);
+int 	ft_new_argv(t_all *all);
+int 	ft_realloc_argv(t_all *all);
+int 	ft_add_word_in_argv(t_all *all, char **word);
+
+//ft_parse_fd.c
+int		ft_parse_file_name(t_all *all, char *line, int *i, char *redir);
+int		ft_create_file(t_all *all, char **word, char *line, char *redir);
+int		ft_err_fd(t_all *all, char **word, char *line);
+int		ft_get_fd(char *redir, char **word);
+
+//ft_parse_redir.c
+int		error_redir(char *line, char c, t_all *all);
+int		ft_redir(t_all *all, char *line, char *redir);
+int		ft_redir_left_or_right(t_all *all, char *line, char **word, char *redir);
+
+//ft_parse_quotes.c
+int		ft_single_quote(char *line, char **word);
+int		ft_double_quote(char *line, char **word, t_all *all);
+int		ft_quotes(t_all *all, char *line, char **word);
+
+//ft_parse_env.c
+char	*ft_env_res(char *line, int *i, t_all *all, char **word);
+char	*ft_get_env(char *line, int *i, t_all *all);
+char	*ft_get_env_not_valid_name(char **word, int *i);
+char	*ft_get_env_status(char **word, int *i, int len);
+
+//ft_parse_pipe.c
+int		ft_find_pipe_or_exec(t_all *all, char **word, char *line);
+int		ft_execute_or_pipe(t_all *all, int (*func)(t_all *all), char **word, char *line);
+int		ft_pipe(t_all *all);
+
 #endif

@@ -6,7 +6,7 @@
 #    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/29 16:48:52 by memilio           #+#    #+#              #
-#    Updated: 2020/09/29 17:13:45 by memilio          ###   ########.fr        #
+#    Updated: 2020/10/12 16:29:43 by memilio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,9 +46,6 @@ FILES =			ft_memset.c \
 				ft_putnbr_fd.c \
 				ft_putendl_fd.c \
 				ft_itoa.c \
-				get_next_line.c \
-				ft_strdup_gnl.c \
-				ft_skip_spaces.c \
 				ft_strcmp.c \
 				ft_strstrlen.c
 FILES_BONUS =	ft_lstnew.c \

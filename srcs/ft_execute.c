@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 15:51:45 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/12 16:24:00 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,6 @@ int		ft_execute_our(t_all *all)
 	else if (!ft_strcmp(all->argv[0], "unset"))
 		return (ft_unset(all));
 	return (-1);
-}
-
-int		ft_not_absolute_path(t_all *all)
-{
-	if (all->argv[0] && ft_strchr("./", all->argv[0][0]))
-		return (0);
-	return (1);
 }
 
 void	ft_get_path(t_all *all)
@@ -106,7 +99,7 @@ int		ft_send_error(t_all *all, struct stat *buf, int t)
 int		ft_execute(t_all *all)
 {
 	int				i;
-	struct stat 	buf;
+	struct stat		buf;
 	int				st;
 
 	if (all->argv[0] == 0)

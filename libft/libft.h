@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 22:43:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/09/29 17:13:31 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 16:29:25 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 int					ft_tolower(int ch);
 int					ft_toupper(int ch);
-char				*ft_strdup_gnl(char *str, int f);
-int					get_next_line(int fd, char **line);
-void				ft_skip_spaces(char *str, int *i);
 int					ft_strcmp(const char *str1, const char *str2);
 int					ft_strstrlen(char **ar);
 
