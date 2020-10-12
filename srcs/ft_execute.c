@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 15:49:25 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 15:51:45 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,9 @@ int		ft_send_error(t_all *all, struct stat *buf, int t)
 
 int		ft_execute(t_all *all)
 {
-	int		i;
-	struct stat  buf;
+	int				i;
+	struct stat 	buf;
+	int				st;
 
 	if (all->argv[0] == 0)
 		return (1);
@@ -122,10 +123,8 @@ int		ft_execute(t_all *all)
 	}
 	ft_get_path_in_argv(all);
 	ft_get_path(all);
-	int	t = stat(all->execute.res, &buf);
-	if (t < 0 || S_ISDIR(buf.st_mode) || !(S_IXUSR & buf.st_mode))
-	{
-		return (ft_send_error(all, &buf, t));
-	}
+	st = stat(all->execute.res, &buf);
+	if (st < 0 || S_ISDIR(buf.st_mode) || !(S_IXUSR & buf.st_mode))
+		return (ft_send_error(all, &buf, st));
 	return (ft_execute_fork(all));
 }
