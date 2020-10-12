@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:26:53 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 16:33:12 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 18:05:16 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		ft_add_word_in_argv(t_all *all, char **word)
 	if (!(all->argv[all->word_count] = ft_strdup(*word)))
 		ft_malloc_error();
 	free(*word);
-	*word = 0;// KEK PEK
+	*word = 0;
 	all->word_count += 1;
 	if (all->word_count == all->size_argv - 1)
 		ft_realloc_argv(all);

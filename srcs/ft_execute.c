@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 16:24:00 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 18:03:58 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_execute_our(t_all *all)
+static int	ft_execute_our(t_all *all)
 {
 	if (!ft_strcmp(all->argv[0], "cd"))
 		return (ft_cd(all));
@@ -29,7 +29,7 @@ int		ft_execute_our(t_all *all)
 	return (-1);
 }
 
-void	ft_get_path(t_all *all)
+static void	ft_get_path(t_all *all)
 {
 	int i;
 
@@ -58,7 +58,7 @@ void	ft_get_path(t_all *all)
 	strstrfree(all->execute.path);
 }
 
-int		ft_execute_fork(t_all *all)
+static int	ft_execute_fork(t_all *all)
 {
 	int		pid;
 
@@ -77,7 +77,7 @@ int		ft_execute_fork(t_all *all)
 	return (1);
 }
 
-int		ft_send_error(t_all *all, struct stat *buf, int t)
+static int	ft_send_error(t_all *all, struct stat *buf, int t)
 {
 	g_status = S_ISDIR(buf->st_mode) ? 126 : 127;
 	if (all->execute.is_relative)
@@ -96,7 +96,7 @@ int		ft_send_error(t_all *all, struct stat *buf, int t)
 	return (1);
 }
 
-int		ft_execute(t_all *all)
+int			ft_execute(t_all *all)
 {
 	int				i;
 	struct stat		buf;

@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 13:03:33 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 17:48:58 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char		*get_line(int fd)
+static char	*ft_get_line(int fd)
 {
 	char	*line;
 	char	buf[2];
@@ -39,7 +39,7 @@ char		*get_line(int fd)
 	return (line);
 }
 
-int			ft_clone_envp(char **envp, t_all *all)
+static int	ft_clone_envp(char **envp, t_all *all)
 {
 	int		i;
 
@@ -75,7 +75,7 @@ static void	ft_minishell(t_all *all)
 	while (1)
 	{
 		ft_promt();
-		if (!(line = get_line(0)))
+		if (!(line = ft_get_line(0)))
 			ft_eof();
 		if (!ft_strlen(line))
 			continue ;
