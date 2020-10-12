@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 12:03:19 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 12:29:15 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int		ft_execute_fork(t_all *all)
 int		ft_execute(t_all *all)
 {
 	int		i;
+	struct stat  buf;
 
 	if (all->argv[0] == 0)
 		return (1);
@@ -102,10 +103,8 @@ int		ft_execute(t_all *all)
 	}
 	ft_get_path_in_argv(all);
 	ft_get_path(all);
-	all->execute.fd = open(all->execute.res, O_RDONLY);
-	if (all->execute.fd < 0)
+	if (stat(all->execute.res, &buf) < 0 || S_ISDIR(buf.st_mode))
 	{
-		errno = all->execute.is_relative ? 0 : 2;
 		g_status = 127;
 		ft_error(all->argv, errno);
 		return (1);
