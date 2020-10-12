@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:22:15 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 12:37:11 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/12 13:03:33 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ void		ft_promt(void)
 	}
 }
 
-static void	ft_minishell(t_all *all, char *line)
+static void	ft_minishell(t_all *all)
 {
+	char *line;
+
 	while (1)
 	{
 		ft_promt();
@@ -77,38 +79,31 @@ static void	ft_minishell(t_all *all, char *line)
 			ft_eof();
 		if (!ft_strlen(line))
 			continue ;
-		all->parse.word_s = 0;
 		all->fds[0] = 0;
 		all->fds[1] = 1;
 		if (!(all->argv = ft_calloc(2, sizeof(char *))))
 			ft_malloc_error();
 		all->size_argv = 2;
-		all->parse.word_e = 0;
-		all->parse.word_count = 0;
-		all->parse.space_before = 0;
+		all->word_count = 0;
 		all->have_redir = 0;
 		ft_parse(line, all);
 		dup2(3, 0);
 		dup2(4, 1);
-		if (line[0] == '+')
-			break ;
 		free(line);
 	}
 }
 
 int			main(int argc, char **argv, char **envp)
 {
-	char	*line;
 	t_all	all;
 
 	g_status = 0;
-	line = NULL;
 	ft_clone_envp(envp, &all);
 	dup2(0, 3);
 	dup2(1, 4);
 	signal(SIGINT, ft_sigint);
 	signal(SIGQUIT, ft_quit);
-	ft_minishell(&all, line);
+	ft_minishell(&all);
 	(void)argc;
 	(void)argv;
 	return (0);

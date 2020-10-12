@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 11:21:20 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/12 13:02:43 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@
 # define ENDCOLOR "\033[0m"
 # define GREEN "\033[38;5;46m"
 
-typedef struct	s_parse
-{
-	int			word_s;
-	int			word_e;
-	int			word_count;
-	int 		space_before;
-}				t_parse;
-
 typedef struct	s_execute
 {
 	char		**path;
@@ -48,7 +40,7 @@ typedef struct	s_execute
 
 typedef struct  s_all
 {
-	t_parse		parse;
+	int			word_count;
 	t_execute	execute;
 	int 		fds[2];
 	char		**argv;
