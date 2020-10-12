@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 15:13:02 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/12 15:49:25 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,14 @@ int		ft_execute_fork(t_all *all)
 	return (1);
 }
 
-int		ft_send_error(t_all *all, struct stat *buf)
+int		ft_send_error(t_all *all, struct stat *buf, int t)
 {
 	g_status = S_ISDIR(buf->st_mode) ? 126 : 127;
 	if (all->execute.is_relative)
 		errno = 0;
-	if ((S_IXUSR & buf->st_mode) == 0)
+	else if (t < 0)
+		errno = 2;
+	else if ((S_IXUSR & buf->st_mode) == 0)
 	{
 		errno = 13;
 		g_status = 1;
@@ -120,7 +122,10 @@ int		ft_execute(t_all *all)
 	}
 	ft_get_path_in_argv(all);
 	ft_get_path(all);
-	if (stat(all->execute.res, &buf) < 0 || S_ISDIR(buf.st_mode) || !(S_IXUSR & buf.st_mode))
-		return (ft_send_error(all, &buf));
+	int	t = stat(all->execute.res, &buf);
+	if (t < 0 || S_ISDIR(buf.st_mode) || !(S_IXUSR & buf.st_mode))
+	{
+		return (ft_send_error(all, &buf, t));
+	}
 	return (ft_execute_fork(all));
 }
