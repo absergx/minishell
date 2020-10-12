@@ -6,7 +6,7 @@
 /*   By: casubmar <casubmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 10:48:58 by casubmar         ###   ########.fr       */
+/*   Updated: 2020/10/12 11:21:20 by casubmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,21 @@ typedef struct	s_parse
 	int 		space_before;
 }				t_parse;
 
+typedef struct	s_execute
+{
+	char		**path;
+	char		*temp;
+	char		*temp2;
+	int			fd;
+	char 		*res;
+	int			status;
+	int			is_relative;
+}				t_execute;
+
 typedef struct  s_all
 {
 	t_parse		parse;
+	t_execute	execute;
 	int 		fds[2];
 	char		**argv;
 	char 		**envp;
@@ -89,4 +101,7 @@ int 	ft_get_fd(char *redir, char **word);
 int 	ft_parse_file_name(t_all *all, char *line, int *i, char *redir);
 void	ft_fork_error(void);
 char	*ft_get_env_status(char **word, int *i, int len);
+void	ft_get_path_in_argv(t_all *all);
+void	ft_get_path(t_all *all);
+int		ft_execute_fork(t_all *all);
 #endif
