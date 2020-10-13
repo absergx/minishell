@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/13 12:57:46 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/13 15:00:10 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ static int	ft_send_error(t_all *all, struct stat *buf, int t)
 		g_status = 1;
 	}
 	if (g_status == 126)
-		ft_error(all->argv, 21);
+		ft_error(all->argv, 21, NULL);
 	else
-		ft_error(all->argv, errno);
+		ft_error(all->argv, errno, NULL);
 	return (1);
 }
 
@@ -111,7 +111,7 @@ int			ft_execute(t_all *all)
 	if ((i = ft_execute_our(all)) != -1)
 	{
 		if (errno)
-			ft_error(all->argv, errno);
+			ft_error(all->argv, errno, NULL);
 		return (i);
 	}
 	ft_get_path_in_argv(all);

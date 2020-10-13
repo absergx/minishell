@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:33:41 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 19:39:00 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/13 15:00:06 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_err_fd(t_all *all, char **word, char *line)
 
 	errno = stat(*word, &buf) < 0 ? 2 : 13;
 	ft_add_word_in_argv(all, word);
-	ft_error(all->argv, errno);
+	ft_error(all->argv, errno, NULL);
 	fd = 0;
 	while (line[fd] && (line[fd] != '|' && line[fd] != ';'))
 		++fd;

@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/13 12:57:57 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/13 14:58:37 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ char			*ft_add_symbol(char *word, char c);
 ** ft_error.c
 */
 
-int				ft_error(char **argv, int errcode);
+int				ft_error(char **argv, int errcode, char *str);
 void			check_exit_status(int status);
 int				ft_print_error(char *str);
 void			ft_malloc_error(void);
