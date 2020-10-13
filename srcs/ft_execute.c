@@ -93,7 +93,6 @@ static int	ft_send_error(t_all *all, struct stat *buf, int t)
 		ft_error(all->argv, 21);
 	else
 		ft_error(all->argv, errno);
-	strstrfree(all->argv);
 	return (1);
 }
 

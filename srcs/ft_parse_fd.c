@@ -21,7 +21,7 @@ static int	ft_err_fd(t_all *all, char **word, char *line)
 	ft_add_word_in_argv(all, word);
 	ft_error(all->argv, errno);
 	fd = 0;
-	while (line[fd] && (line[fd] != '|' || line[fd] != ';'))
+	while (line[fd] && (line[fd] != '|' && line[fd] != ';'))
 		++fd;
 	ft_new_argv(all);
 	free(*word);

@@ -38,9 +38,12 @@ int			strstrfree(char **str)
 	int i;
 
 	i = 0;
+	if (!str || !str[0])
+		return (1);
 	while (str[i])
 	{
-		free(str[i]);
+		if (str[i])
+			free(str[i]);
 		++i;
 	}
 	free(str);

@@ -13,8 +13,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c3730f52-3073-4281-b041-1578f9c9b935" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/commands/ft_exit.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/commands/ft_exit.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/ft_execute.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ft_execute.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/ft_parse_fd.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ft_parse_fd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/ft_parse_redir.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ft_parse_redir.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/ft_parse_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ft_parse_utils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,12 +27,6 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>dup2</find>
-      <find>prin</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -98,7 +94,7 @@
       <workItem from="1601556808756" duration="2000" />
       <workItem from="1601556822398" duration="122000" />
       <workItem from="1601559078415" duration="8503000" />
-      <workItem from="1602586242961" duration="475000" />
+      <workItem from="1602586242961" duration="2908000" />
     </task>
     <servers />
   </component>
@@ -106,38 +102,38 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="2518" height="477" key="GridCell.Tab.0.bottom" timestamp="1602265515642">
+    <state width="2518" height="477" key="GridCell.Tab.0.bottom" timestamp="1602589720343">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.0.bottom/0.23.2560.1359@0.23.2560.1359" timestamp="1602265515642" />
-    <state width="2518" height="477" key="GridCell.Tab.0.center" timestamp="1602265515642">
+    <state width="2518" height="477" key="GridCell.Tab.0.bottom/0.23.2560.1359@0.23.2560.1359" timestamp="1602589720343" />
+    <state width="2518" height="477" key="GridCell.Tab.0.center" timestamp="1602589720343">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.0.center/0.23.2560.1359@0.23.2560.1359" timestamp="1602265515642" />
-    <state width="2518" height="477" key="GridCell.Tab.0.left" timestamp="1602265515641">
+    <state width="2518" height="477" key="GridCell.Tab.0.center/0.23.2560.1359@0.23.2560.1359" timestamp="1602589720343" />
+    <state width="2518" height="477" key="GridCell.Tab.0.left" timestamp="1602589720342">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.0.left/0.23.2560.1359@0.23.2560.1359" timestamp="1602265515641" />
-    <state width="2518" height="477" key="GridCell.Tab.0.right" timestamp="1602265515642">
+    <state width="2518" height="477" key="GridCell.Tab.0.left/0.23.2560.1359@0.23.2560.1359" timestamp="1602589720342" />
+    <state width="2518" height="477" key="GridCell.Tab.0.right" timestamp="1602589720343">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.0.right/0.23.2560.1359@0.23.2560.1359" timestamp="1602265515642" />
-    <state width="2518" height="477" key="GridCell.Tab.1.bottom" timestamp="1602265515643">
+    <state width="2518" height="477" key="GridCell.Tab.0.right/0.23.2560.1359@0.23.2560.1359" timestamp="1602589720343" />
+    <state width="2518" height="477" key="GridCell.Tab.1.bottom" timestamp="1602589720344">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.1.bottom/0.23.2560.1359@0.23.2560.1359" timestamp="1602265515643" />
-    <state width="2518" height="477" key="GridCell.Tab.1.center" timestamp="1602265515642">
+    <state width="2518" height="477" key="GridCell.Tab.1.bottom/0.23.2560.1359@0.23.2560.1359" timestamp="1602589720344" />
+    <state width="2518" height="477" key="GridCell.Tab.1.center" timestamp="1602589720344">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.1.center/0.23.2560.1359@0.23.2560.1359" timestamp="1602265515642" />
-    <state width="2518" height="477" key="GridCell.Tab.1.left" timestamp="1602265515642">
+    <state width="2518" height="477" key="GridCell.Tab.1.center/0.23.2560.1359@0.23.2560.1359" timestamp="1602589720344" />
+    <state width="2518" height="477" key="GridCell.Tab.1.left" timestamp="1602589720344">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.1.left/0.23.2560.1359@0.23.2560.1359" timestamp="1602265515642" />
-    <state width="2518" height="477" key="GridCell.Tab.1.right" timestamp="1602265515642">
+    <state width="2518" height="477" key="GridCell.Tab.1.left/0.23.2560.1359@0.23.2560.1359" timestamp="1602589720344" />
+    <state width="2518" height="477" key="GridCell.Tab.1.right" timestamp="1602589720344">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state width="2518" height="477" key="GridCell.Tab.1.right/0.23.2560.1359@0.23.2560.1359" timestamp="1602265515642" />
+    <state width="2518" height="477" key="GridCell.Tab.1.right/0.23.2560.1359@0.23.2560.1359" timestamp="1602589720344" />
     <state x="0" y="23" width="2560" height="1359" key="SettingsEditor" timestamp="1601466674251">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
@@ -154,6 +150,11 @@
           <url>file://$PROJECT_DIR$/srcs/ft_commas.c</url>
           <line>57</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/srcs/ft_parse_fd.c</url>
+          <line>19</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
