@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:55:26 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 19:40:02 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/13 15:12:11 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	ft_parse_file_name(t_all *all, char *line, int *i, char *redir)
 {
-	char *word;
-	int temp;
+	char	*word;
+	int		temp;
 
 	word = 0;
 	while (1)
@@ -23,7 +23,8 @@ static int	ft_parse_file_name(t_all *all, char *line, int *i, char *redir)
 		if (ft_strchr("| ;><", line[*i]) || line[*i] == 0)
 		{
 			if (word)
-				*i = (temp = ft_create_file(all, &word, line, redir)) > 0 ? temp : *i;
+				*i = ((temp = ft_create_file(all, &word, line, redir)) > 0)
+					? temp : *i;
 			if (line[*i] == ' ')
 				*i += 1;
 			break ;
