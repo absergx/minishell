@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 11:12:28 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/07 16:21:19 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/13 14:23:58 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,4 @@ void	ft_quit(int sig)
 	pid = waitpid(-1, &status, WNOHANG);
 	if (!pid)
 		ft_putendl_fd("Quit: 3", 1);
-	else
-		ft_putstr_fd("\b\b \b\b", 1);
 }
