@@ -13,10 +13,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c3730f52-3073-4281-b041-1578f9c9b935" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/ft_execute.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ft_execute.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/ft_parse_fd.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ft_parse_fd.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/srcs/ft_parse_redir.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ft_parse_redir.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcs/ft_parse_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/ft_parse_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test" beforeDir="false" afterPath="$PROJECT_DIR$/test" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +93,7 @@
       <workItem from="1601556808756" duration="2000" />
       <workItem from="1601556822398" duration="122000" />
       <workItem from="1601559078415" duration="8503000" />
-      <workItem from="1602586242961" duration="2908000" />
+      <workItem from="1602586242961" duration="3899000" />
     </task>
     <servers />
   </component>
@@ -138,10 +137,10 @@
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
     <state x="0" y="23" width="2560" height="1359" key="SettingsEditor/0.23.2560.1359@0.23.2560.1359" timestamp="1601466674251" />
-    <state x="1026" y="333" width="670" height="676" key="search.everywhere.popup" timestamp="1601490701629">
+    <state x="1026" y="333" width="670" height="676" key="search.everywhere.popup" timestamp="1602590809669">
       <screen x="0" y="23" width="2560" height="1359" />
     </state>
-    <state x="1026" y="333" width="670" height="676" key="search.everywhere.popup/0.23.2560.1359@0.23.2560.1359" timestamp="1601490701629" />
+    <state x="1026" y="333" width="670" height="676" key="search.everywhere.popup/0.23.2560.1359@0.23.2560.1359" timestamp="1602590809669" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -150,11 +149,6 @@
           <url>file://$PROJECT_DIR$/srcs/ft_commas.c</url>
           <line>57</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/srcs/ft_parse_fd.c</url>
-          <line>19</line>
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

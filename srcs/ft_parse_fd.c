@@ -18,8 +18,7 @@ static int	ft_err_fd(t_all *all, char **word, char *line)
 	struct stat	buf;
 
 	errno = stat(*word, &buf) < 0 ? 2 : 13;
-	ft_add_word_in_argv(all, word);
-	ft_error(all->argv, errno, NULL);
+	ft_error(all->argv, errno, *word);
 	fd = 0;
 	while (line[fd] && (line[fd] != '|' && line[fd] != ';'))
 		++fd;
