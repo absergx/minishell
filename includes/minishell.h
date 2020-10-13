@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 17:33:12 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 19:41:17 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/13 12:57:57 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ int				ft_error(char **argv, int errcode);
 void			check_exit_status(int status);
 int				ft_print_error(char *str);
 void			ft_malloc_error(void);
-void			ft_fork_error(void);
 
 /*
 ** ft_execute.c

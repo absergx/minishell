@@ -6,7 +6,7 @@
 #    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/17 17:45:53 by memilio           #+#    #+#              #
-#    Updated: 2020/10/12 17:44:34 by memilio          ###   ########.fr        #
+#    Updated: 2020/10/13 13:02:20 by memilio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,4 +61,9 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+norme:
+	norminette ./includes/*.h
+	norminette $(SRC_DIR)
+	norminette $(LFT_DIR)
+
+.PHONY: all clean fclean re norme

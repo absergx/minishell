@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/12 18:03:58 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/13 12:57:46 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	ft_execute_fork(t_all *all)
 	if (pid == 0)
 		exit(execve(all->execute.res, all->argv, all->envp));
 	else if (pid < 0)
-		ft_fork_error();
+		ft_malloc_error();
 	else
 	{
 		wait(&(all->execute.status));
