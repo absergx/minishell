@@ -63,3 +63,11 @@ int			ft_get_fd(char *redir, char **word)
 		fd = open(*word, O_CREAT | O_APPEND | O_WRONLY, 0644);
 	return (fd);
 }
+
+void 		ft_execute_init(t_all *all)
+{
+	all->execute.temp = 0;
+	all->execute.temp2 = 0;
+	all->execute.path = 0;
+	all->execute.res = 0;
+}

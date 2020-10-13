@@ -86,6 +86,7 @@ int				ft_add_word_in_argv(t_all *all, char **word);
 int				ft_get_fd(char *redir, char **word);
 int				ft_create_file(t_all *all, char **word, char *line,
 				char *redir);
+void 			ft_execute_init(t_all *all);
 
 /*
 ** ft_parse_redir.c

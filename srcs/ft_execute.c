@@ -106,6 +106,7 @@ int			ft_execute(t_all *all)
 	struct stat		buf;
 	int				st;
 
+	ft_execute_init(all);
 	if (all->argv[0] == 0)
 		return (1);
 	if (!ft_strcmp(all->argv[0], "exit"))
