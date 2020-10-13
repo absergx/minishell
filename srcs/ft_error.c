@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 16:20:13 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/13 14:59:34 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/13 15:09:33 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ int		ft_error(char **argv, int errcode, char *str)
 	if (!g_status)
 		g_status = 1;
 	ft_putstr_fd(RED"minishell: ", 2);
-	ft_putstr_fd(argv[0], 2);
-	ft_putstr_fd(": ", 2);
+	if (!str)
+	{
+		ft_putstr_fd(argv[0], 2);
+		ft_putstr_fd(": ", 2);
+	}
 	if (str)
 	{
 		ft_putstr_fd(str, 2);
