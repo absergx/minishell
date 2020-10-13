@@ -23,8 +23,10 @@ static int	ft_parse_file_name(t_all *all, char *line, int *i, char *redir)
 		if (ft_strchr("| ;><", line[*i]) || line[*i] == 0)
 		{
 			if (word)
-				*i = ((temp = ft_create_file(all, &word, line, redir)) > 0)
-					? temp : *i;
+			{
+				temp = ft_create_file(all, &word, line, redir);
+				*i = temp > 0 ? temp : *i;
+			}
 			if (line[*i] == ' ')
 				*i += 1;
 			break ;
