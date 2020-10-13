@@ -61,5 +61,6 @@ int			ft_exit(t_all *all)
 		ft_exit_error(all->argv[1], 0);
 		exit(255);
 	}
+	strstrfree(all->argv);
 	return (errno);
 }
