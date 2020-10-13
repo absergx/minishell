@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/13 15:00:10 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/13 15:48:58 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ static int	ft_send_error(t_all *all, struct stat *buf, int t)
 	else
 		ft_error(all->argv, errno, NULL);
 	ft_new_argv(all);
+	if (all->execute.res)
+		free(all->execute.res);
 	return (1);
 }
 
