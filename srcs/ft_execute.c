@@ -74,6 +74,7 @@ static int	ft_execute_fork(t_all *all)
 		if (all->execute.res)
 			free(all->execute.res);
 	}
+	ft_new_argv(all);
 	return (1);
 }
 
@@ -93,6 +94,7 @@ static int	ft_send_error(t_all *all, struct stat *buf, int t)
 		ft_error(all->argv, 21, NULL);
 	else
 		ft_error(all->argv, errno, NULL);
+	ft_new_argv(all);
 	return (1);
 }
 
