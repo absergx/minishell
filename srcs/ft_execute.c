@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 12:00:33 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/13 15:48:58 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/13 16:13:45 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	ft_execute_fork(t_all *all)
 static int	ft_send_error(t_all *all, struct stat *buf, int t)
 {
 	g_status = S_ISDIR(buf->st_mode) ? 126 : 127;
-	if (all->execute.is_relative)
+	if (all->execute.is_relative && ft_get_envp_key(all, "PATH") != -1)
 		errno = 0;
 	else if (t < 0)
 		errno = 2;
