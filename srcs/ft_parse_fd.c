@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:33:41 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/13 15:00:06 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/13 16:07:31 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			ft_get_fd(char *redir, char **word)
 	return (fd);
 }
 
-void 		ft_execute_init(t_all *all)
+void		ft_execute_init(t_all *all)
 {
 	all->execute.temp = 0;
 	all->execute.temp2 = 0;
